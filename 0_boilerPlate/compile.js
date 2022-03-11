@@ -10,6 +10,6 @@ const contractPath = path.resolve(__dirname, 'contracts', 'SimpleContract.sol');
 // arguments: file, encoding type
 const source = fs.readFileSync(contractPath, 'utf8');
 
-// compule contract
+// compile contract and export 
 // arguments: source code, number of contracts to compile
-console.log(solc.compile(source, 1));
+module.exports = solc.compile(source, 1).contracts[':SimepleContract']
