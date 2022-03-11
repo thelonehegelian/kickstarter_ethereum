@@ -20,3 +20,14 @@
 
     ABI -- Contract ByteCode 
 
+- node libraries used
+  - fs
+  - path
+  - assert --> for testing
+
+- Other libraries used
+  - mocha
+  - ganache
+  - web3
+      -- What is a web3 Provider and why is it needed?
+      --  
