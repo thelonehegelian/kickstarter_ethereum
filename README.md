@@ -13,6 +13,11 @@
 - deploy.js --> script to deploy bytecode to the evm
 
 ### Contract Deployment
+compile the contract: 
+`node ./compile.js`
+
+testing the contract 
+`npm run test`
 
         solidity code   
       
