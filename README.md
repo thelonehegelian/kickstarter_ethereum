@@ -26,7 +26,8 @@
   - assert --> for testing
 
 - Other libraries used
-  - mocha
+  - mocha --> a general testing framework
+     Main mocha functions: it :: describe :: beforeEach
   - ganache
   - web3
       -- What is a web3 Provider and why is it needed?
