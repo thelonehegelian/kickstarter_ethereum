@@ -14,7 +14,9 @@
 
 ### Contract Deployment
 
-- solidity code 
-- compile 
-  ABI -- ByteCode 
+        solidity code   
+      
+      Solidity Compiler 
+
+    ABI -- Contract ByteCode 
 
