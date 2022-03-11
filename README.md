@@ -5,9 +5,16 @@
 
 ### Folder and File Structure
 - contracts
-  - Inbox.sol
+  - Inbox.sol --> main contract file
 - test
-  - Inbox.test.js
+  - Inbox.test.js --> for writing tests for contract functions
 - package.json
-- compile.json
-- deploy.js
+- compile.js --> script to compile the solidity code
+- deploy.js --> script to deploy bytecode to the evm
+
+### Contract Deployment
+
+- solidity code 
+- compile 
+  ABI -- ByteCode 
+

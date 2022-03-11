@@ -1,0 +1,24 @@
+{
+  "name": "ethereum_boiler_plate",
+  "version": "1.0.0",
+  "description": "- set up basic code for an ethereum/solidity development and testing environment\r - this boilerplate can be used for other projects too",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thelonehegelian-learning/ethereum_solidity.git"
+  },
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "javascript"
+  ],
+  "author": "thelonehegelian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thelonehegelian-learning/ethereum_solidity/issues"
+  },
+  "homepage": "https://github.com/thelonehegelian-learning/ethereum_solidity#readme"
+}
