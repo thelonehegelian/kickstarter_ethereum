@@ -1,7 +1,7 @@
 # 0_boilerPlate
 
 - set up basic code for an ethereum/solidity development and testing environment
-- this boilerplate can be used for other projects too 
+- this boilerplate can be used for other projects too
 
 ### Folder and File Structure
 - contracts
@@ -13,17 +13,17 @@
 - deploy.js --> script to deploy bytecode to the evm
 
 ### Contract Deployment
-compile the contract: 
+compile the contract:
 `node ./compile.js`
 
-testing the contract 
+testing the contract
 `npm run test`
 
         solidity code   
-      
-      Solidity Compiler 
 
-    ABI -- Contract ByteCode 
+      Solidity Compiler
+
+    ABI -- Contract ByteCode
 
 - node libraries used
   - fs
@@ -36,4 +36,4 @@ testing the contract
   - ganache
   - web3
       -- What is a web3 Provider and why is it needed?
-      --  
+      --  Almost all web3 functions are asynchronous and therefore return a promise
