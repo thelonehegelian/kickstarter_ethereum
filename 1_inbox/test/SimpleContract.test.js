@@ -5,14 +5,11 @@ const Web3 = require("web3");
 // instantiate web3 with a ganache provider
 const web3 = new Web3(ganache.provider());
 
-beforeEach(() => {
+let accounts;
+beforeEach(async () => {
   // gets a list of accounts from Ganache
-  let accounts;
-  web3.eth.getAccounts().then((fetchAccounts) => {
-    accounts = fetchAccounts;
-    console.log(accounts);
-  });
-
+  accounts = await web3.eth.getAccounts();
+  console.log(accounts);
   // uses an account from the above list to deploy the contract
 });
 
