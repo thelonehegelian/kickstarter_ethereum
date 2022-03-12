@@ -10,7 +10,7 @@ const contractPath = path.resolve(__dirname, "contracts", "Inbox.sol");
 // arguments: file, encoding type
 const source = fs.readFileSync(contractPath, "utf8");
 
-// compile contract and export
+// compile contract and export as object
 // arguments: source code, number of contracts to compile
 module.exports = solc.compile(source, 1).contracts[":Inbox"];
 // console.log(solc.compile(source, 1).contracts[":Inbox"]);

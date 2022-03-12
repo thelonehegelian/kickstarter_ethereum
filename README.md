@@ -44,7 +44,7 @@ testing the contract
 
 - Structure of a compiled contract:
 
-        {
+        `{
        contracts: {
          ':Inbox': {
            assembly: [Object],
@@ -61,7 +61,7 @@ testing the contract
        },
        sourceList: [ '' ],
        sources: { '': { AST: [Object] } }
-      }
+      }`
 
   - The interface property in the object is the ABI of the contract
 
