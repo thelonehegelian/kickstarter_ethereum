@@ -13,7 +13,7 @@ const source = fs.readFileSync(contractPath, "utf8");
 // compile contract and export
 // arguments: source code, number of contracts to compile
 module.exports = solc.compile(source, 1).contracts[":Inbox"];
-// console.log(solc.compile(source, 1));
+// console.log(solc.compile(source, 1).contracts[":Inbox"]);
 /*
  Structure of the compiled contract object:
 {
