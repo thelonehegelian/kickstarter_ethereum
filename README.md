@@ -40,6 +40,7 @@ testing the contract
   - ganache
   - web3
     -- What is a web3 Provider and why is it needed?
+    -- What is web3.eth?
     -- Almost all web3 functions are asynchronous and therefore return a promise
 
 - Structure of a compiled contract:
