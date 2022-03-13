@@ -13,6 +13,7 @@ const { interface, bytecode } = require("../compile");
 // variables
 let accounts;
 let inbox;
+let initialString = "Hello";
 
 // this function is initiated at the start of each test
 // it is an async function
@@ -26,7 +27,7 @@ beforeEach(async () => {
     // deploy the bytecode with initial value of 'Hi There!' in the constructor function
     .deploy({
       data: bytecode,
-      arguments: ["Hi There!"],
+      arguments: [initialString], // arguments for the constructor function
     })
     // send transaction from an address with maximum gas of 1000000 to deploy the contract
     .send({ from: accounts[0], gas: "1000000" });
@@ -37,5 +38,13 @@ describe("Inbox", () => {
   it("deploys a contract", () => {
     // check if contract address exists i.e. contract was deployed to an address
     assert.ok(inbox.options.address);
+  });
+  // test to see if there is a default message created using Constructor function
+  it("Has a default message", async () => {
+    // 'message' exists as  a variable that is exists as a property on the deployed contract object
+    // 'message()' property is a function to retreive the value of the 'message variable'
+    const message = await inbox.methods.message().call(); // call() method calls the message() method
+    // test if the message above matches the initial message created when the contract was created
+    assert.equal(message, initialString);
   });
 });

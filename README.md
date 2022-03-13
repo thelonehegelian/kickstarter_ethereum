@@ -328,3 +328,21 @@ testing the contract
      ]
    }
    ```
+
+2. Why does a deployed contract have a variables as property and variable as function in the contract object?
+   Example:
+
+```javascript
+
+  methods: {
+    setMessage: [Function: bound _createTxObject],
+    '0x368b8772': [Function: bound _createTxObject],
+    'setMessage(string)': [Function: bound _createTxObject],
+    message: [Function: bound _createTxObject],
+    '0xe21f37ce': [Function: bound _createTxObject],
+    'message()': [Function: bound _createTxObject] // why is this/
+}
+```
+
+`message` exists as a variable that is exists as a property on the deployed contract object
+`message()` property is a function to retreive the value of the 'message variable'
