@@ -73,7 +73,36 @@ testing the contract
 
   - ABI is a standard format like json to interact with ethereum contracts [rephrase]
 
-  ### FAQ
+# 1_Inbox
+
+- What does an ethereum transaction look like?
+- What is the difference between calling a function and sending a transaction?
+- What happens when we send a transaction to a function or any other transaction?
+
+  - we get a transaction receipt (which also has a transaction hash) back from the network
+
+- What does a transaction receipt look like?
+
+```javascript
+{
+  transactionHash: '0xbf4f1f2a19e63469ea87e3be3e06caf398d23b43dcf70086f7414c0f025767d3',
+  transactionIndex: 0,
+  blockHash: '0x7ed09fe4071c8630d5a692c1871f9a58afd7d06ab3f1a94fb467597e65f09336',
+  blockNumber: 4,
+  from: '0x1c6411408506686cd74c6e4093dfd404e87102dd',
+  to: '0xc1bc7be45890bd5910731752442b89e265d1881e',
+  gasUsed: 28876,
+  cumulativeGasUsed: 28876,
+  contractAddress: null,
+  status: true,
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  events: {}
+}
+```
+
+- .send, .transfer, .deploy etc are Web3 methods (cf. https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html)
+
+### FAQ
 
 1. What happens when a contract is deployed using the Web3 library?
    A JavaScript representation of the contract of the contract is created. This can be used to interact with the smart contract deployed on the blockchain.
