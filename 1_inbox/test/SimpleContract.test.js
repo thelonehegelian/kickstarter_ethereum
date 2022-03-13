@@ -22,12 +22,12 @@ beforeEach(async () => {
   // uses an account from the above list to deploy the contract
   // create a transactin to deploy the contract
   inbox = await new web3.eth.Contract(JSON.parse(interface)) // interface == ABI
-    // deploy the bytecode with initial value of 'Hi There!'
+    // deploy the bytecode with initial value of 'Hi There!' in the constructor function
     .deploy({
       data: bytecode,
       arguments: ["Hi There!"],
     })
-    // send transaction from an address with maximum gas of 1000000
+    // send transaction from an address with maximum gas of 1000000 to deploy the contract
     .send({ from: accounts[0], gas: "1000000" });
 });
 
