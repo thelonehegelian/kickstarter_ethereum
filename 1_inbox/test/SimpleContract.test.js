@@ -1,5 +1,6 @@
-const assert = require("assert");
+// assert is part of node standard library
 const ganache = require("ganache-cli");
+const assert = require("assert");
 // web3 is a constructor function
 const Web3 = require("web3");
 // instantiate web3 with a ganache provider
@@ -34,6 +35,7 @@ beforeEach(async () => {
 // test to see if the contract is deployed successfully
 describe("Inbox", () => {
   it("deploys a contract", () => {
-    console.log(inbox);
+    // check if contract address exists i.e. contract was deployed to an address
+    assert.ok(inbox.options.address);
   });
 });
