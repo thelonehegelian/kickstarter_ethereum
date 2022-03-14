@@ -15,6 +15,9 @@ const provider = new HDWalletProvider(
   process.env.NETWORK_ENDPOINT
 );
 
+// define web3
+const web3 = new Web3(provider);
+
 // Initial message to be sent to the contract at deployment
 let initialMessage = "Konichiwa!";
 
