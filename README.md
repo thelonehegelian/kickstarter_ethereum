@@ -396,3 +396,5 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 
 `message` exists as a variable that is exists as a property on the deployed contract object
 `message()` property is a function to retreive the value of the 'message variable'
+
+3. What is a Rinkeby Faucet?
