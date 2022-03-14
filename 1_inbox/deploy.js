@@ -1,11 +1,15 @@
+// get environment variables from a .env file
 require("dotenv").config();
+// import web3 library
 const Web3 = require("web3");
 // get ABI and bytecode of the compiled contract
 const { interface, bytecode } = require("./compile");
 // import wallet provider with which to access the accounts on MetaMask
 const HDWalletProvider = require("@truffle/hdwallet-provider");
+
 // Set up the provider with Rinkeby configurations
 // this will give us access to 10 different ethereum accounts (unique addresses)
+// both arhuments are pulled from a .env file
 const provider = new HDWalletProvider(
   process.env.MNEMONIC,
   process.env.NETWORK_ENDPOINT
