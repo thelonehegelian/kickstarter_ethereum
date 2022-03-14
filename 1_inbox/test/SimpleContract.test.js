@@ -57,7 +57,7 @@ describe("Inbox", () => {
     txReceipt = await inbox.methods.setMessage("Guten Morgen").send({
       from: accounts[0],
       gas: "1000000",
-    });
+    }); // the transaction receipt is not needed yet
     // get message value again (should be updated to Guten Morgen)
     const message = await inbox.methods.message().call();
     assert.equal(message, "Guten Morgen");
