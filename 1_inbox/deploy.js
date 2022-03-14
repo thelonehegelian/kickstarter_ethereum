@@ -26,12 +26,20 @@ const deploy = async () => {
   // get all the accounts from the metamask mnemonic
   // one of the accounts would be used to send the transaction for contract deployment
   const accounts = await web3.eth.getAccounts();
-  await new web3.eth.Contract(JSON.parse(interface))
+  console.log(`Attempting to deply contract from ${accounts[0]}`);
+  // Is there a transaction receipt at deployment?
+  const result = await new web3.eth.Contract(JSON.parse(interface))
     .deploy({
       data: bytecode,
       arguments: [initialMessage],
     })
     .send({ from: accounts[0], gas: "1000000" });
+  // console logs the ethereum address of the deployed contract
+  console.log(
+    `Contract deployed to the following address: ${result.options.address}`
+  );
+  // to prevent hanging developement
+  provider.engine.stop();
 };
 
 // call the deploy function
