@@ -82,6 +82,7 @@ testing the contract
   - we get a transaction receipt (which also has a transaction hash) back from the network
 
 - What does a transaction receipt look like?
+  -- Is there a transaction receipt at deployment?
 
 ```javascript
 {
