@@ -1,3 +1,10 @@
+/*
+  The code below is used to test the Inbox smart contract on a local blockchain called ganache
+  Ganache mimics the behavior of Etehreum, for example, the contract deployment code is exactly the same
+  as would be used for deploying on Rinkeby etc. (cf. deploy.js)
+
+*/
+
 // assert is part of node standard library
 const ganache = require("ganache-cli");
 const assert = require("assert");
@@ -24,13 +31,14 @@ beforeEach(async () => {
 
   // uses an account from the above list to deploy the contract
   // create a transactin to deploy the contract
+  // the following lines of code are usually similar deploying to any other network (mainnet or testnet)
   inbox = await new web3.eth.Contract(JSON.parse(interface)) // interface == ABI
     // deploy the bytecode with initial value of 'Hi There!' in the constructor function
     .deploy({
       data: bytecode,
       arguments: [initialString], // arguments for the constructor function
     })
-    // send transaction from an address with maximum gas of 1000000 to deploy the contract
+    // send transaction from an address with maximum gas of 1000000 (gas limit) to deploy the contract
     .send({ from: accounts[0], gas: "1000000" });
 });
 

@@ -117,8 +117,10 @@ Infura is a cloud-based Ethereum node. It is accessible to users for development
 
 To sum: Infura is a cloud-based Ethereum client that gives users access to the Ethereum blockchain (mainnet and testnets) via an API (JavaScript Object Notation Remote Procedure Call (JSON-RPC) API).
 
+### What is MetaMask?
+
 - What is MetaMask?
--
+- How many accounts does MetaMask Mnemonic gives access to?
 
 ### FAQ
 
