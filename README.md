@@ -102,6 +102,24 @@ testing the contract
 
 - .send, .transfer, .deploy etc are Web3 methods (cf. https://web3js.readthedocs.io/en/v1.2.11/web3-eth-contract.html)
 
+### Deploying a contract to a test network
+
+- What is Infura? (https://decrypt.co/resources/what-is-infura)
+
+  "It is a set of tools for anyone to create an application that connects to the Ethereum blockchain. It interacts with the Ethereum blockchain and runs nodes on behalf of its users."
+  _Official_
+  "The Ethereum Application Program Interface (API) on Infura gives users access to methods for sending transactions to the Ethereum blockchain. This is done via the JavaScript Object Notation Remote Procedure Call (JSON-RPC) API, allowing for the reading and writing data to the network, and executing smart contracts. These API calls will work for Ethereum Mainnet; Ethereum testnets, including Rinkeby, Kovan, Görli, and Ropsten; and JSON-RPC compatible L2’s such as Polygon, Optimism, and Arbitrum."
+  "These API calls apply to the execution engine (also known as the Execution layer) post-merge with the Ethereum beacon chain."
+
+**My understanding of Infura so far...**
+Each Ethereum node is a client (a software application). To interact with the Ethereum blockchain one needs access to an Ethereum node (client). Most of the Ethereum nodes are run privately by companies or private individuals etc, which means one would have to download an Ethereum node to work with the blockchain (A full node is not necessary even if a node is required).
+Infura is a cloud-based Ethereum node. It is accessible to users for development and deployment of contracts. Such users may not have the resources to run a full node etc...
+
+To sum: Infura is a cloud-based Ethereum client that gives users access to the Ethereum blockchain (mainnet and testnets) via an API (JavaScript Object Notation Remote Procedure Call (JSON-RPC) API).
+
+- What is MetaMask?
+-
+
 ### FAQ
 
 1. What happens when a contract is deployed using the Web3 library?
