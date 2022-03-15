@@ -23,7 +23,7 @@ let inbox;
 let initialString = "Hello";
 let txReceipt;
 
-// this function is initiated at the start of each test
+// this function is initiated at the start of each test, so each time a new contract is deployed
 // it is an async function
 beforeEach(async () => {
   // gets a list of accounts from Ganache

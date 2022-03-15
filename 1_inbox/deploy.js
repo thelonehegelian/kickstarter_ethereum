@@ -9,7 +9,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 // Set up the provider with Rinkeby configurations
 // this will give us access to 10 different ethereum accounts (unique addresses)
-// both arhuments are pulled from a .env file
+// both arguments are pulled from .env file
 const provider = new HDWalletProvider(
   process.env.MNEMONIC,
   process.env.NETWORK_ENDPOINT

@@ -123,6 +123,14 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 - What is MetaMask?
 - How many accounts does MetaMask Mnemonic gives access to?
 
+### Interacting with deployed contracts via Remix
+
+- Injected Web3 Provider
+  From StackOverflow:
+  - You must compile the same exact code that the contract you are trying to load.
+  - Once the compile succeeds, you have to be on the same network that the contract is, by setting your MetaMask account properly.
+  - The last thing to do is paste the contract address on the option: Load from address: and you'll get it on remix to interact with it.
+
 ### FAQ
 
 1. What happens when a contract is deployed using the Web3 library?
