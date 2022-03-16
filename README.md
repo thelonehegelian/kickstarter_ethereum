@@ -72,6 +72,8 @@
 - **payable**: used with a function that requires specific amount of Ether to be sent at function invocation (this is separate from the gas fee)
 - **require**:
 - **ether**
+- **new**
+- ** modifier**
 
 #### The Randomness Problem
 
