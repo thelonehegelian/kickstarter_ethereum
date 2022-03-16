@@ -97,6 +97,17 @@ _"All transactions on the Ethereum blockchain are deterministic state transition
 
 -
 
+# Web3 - A quick introduction
+
+- web.eth.Contract()
+- web3.eth.getAccounts()
+- .deploy() : deploys a contract
+- .send() : sends a transaction (function calls that change the state of the blockchain)
+- .call() : calls a function that does not change the state of the blockchain
+- web3.utils.toWei()
+
+---
+
 # 0_boilerPlate
 
 - set up basic code for an ethereum/solidity development and testing environment
@@ -239,6 +250,16 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
   - You must compile the same exact code that the contract you are trying to load.
   - Once the compile succeeds, you have to be on the same network that the contract is, by setting your MetaMask account properly.
   - The last thing to do is paste the contract address on the option: Load from address: and you'll get it on remix to interact with it.
+
+# 2_Lottery
+
+**Description**
+
+**Working with latest version of Solc**
+
+**Important bits**
+
+- `web3.utils.toWei('0.02', 'ether')`
 
 ### FAQ
 
