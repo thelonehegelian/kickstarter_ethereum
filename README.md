@@ -1,3 +1,97 @@
+# Solidity: a quick introduction
+
+## Solidity Types:
+
+- string
+- bool
+- int
+- uint (256)
+- fixed/ufixed
+- address: these are not simple string values but have methods attached to it, just like there are methods attached to arrays in JavaScript
+  - address
+
+##### Reference Types:
+
+- arrays: fixed and dynamic
+  - arrays have methods attached to them, e.g. push, length
+  - note: the access function created for us to access arrays does not return the whole array but requires an index to return the value
+  - there is a limitation on nested arrays due to the Web3 bridge between JavaScript and Solidity
+  - strings a dynamic arrays, which means the above limitation would apply to array of strings e.g. ['hello', 'how', 'are', 'ya', '!']. This won't work
+- mapping
+- struct
+
+##### Global Variables/Functions
+
+- **msg** variable has the following methods attached to it:
+
+  - data: data from the call or transaction that invoked the function (e.g. `send.transaction({data: 'Hello', bytecode: bytecode})`)
+  - gas: amount of gas the current function has available
+  - sender: address of the account that invoked the function. In case of contract creation the sender would be the person creating the contract
+  - value: amount of ether (in wei) sent to the contract when the function was invoked (can be compared to the required value to accept or reject the function call with _require()_)
+
+- **require**
+- **sha3()**
+- **keccak256()**
+- **block**
+  - block.difficulty
+  - block.timestamp
+- **now**: deprecated now, use block.timestamp
+- memory
+- storage
+- calldata
+
+##### Visibility of Variables
+
+- public
+  - when a variable is set to public a function is generated to provide access to the public variable.
+- private
+
+##### Constructor function
+
+- Constructor function is deprecated in the new version of solidity. In older version it had to be something like this:
+  ```javascript
+  contract Lotto {
+    // constructor function
+    function Lotto() public {}
+  }
+  ```
+- _What does a constructor function do?_
+
+##### Keywords
+
+- **view**
+- **returns**
+- **external**
+- **private**
+- **public**
+- **contract**
+- **msg**
+- **payable**: used with a function that requires specific amount of Ether to be sent at function invocation (this is separate from the gas fee)
+- **require**:
+- **ether**
+
+#### The Randomness Problem
+
+- Why is simulating randomness a problem with Solidity and Etereum?
+
+_From Master Ethereum:_
+
+_"All transactions on the Ethereum blockchain are deterministic state transition operations. This means that every transaction modifies the global state of the Ethereum ecosystem in a calculable way, with no uncertainty. This has the fundamental implication that there is no source of entropy or randomness in Ethereum. Achieving decentralized entropy (randomness) is a well-known problem for which many solutions have been proposed, including RANDAO, or using a chain of hashes, as described by Vitalik Buterin in the blog post “Validator Ordering and Randomness in PoS”."_
+
+- pseudo random generator
+
+  - current block difficulty + block time + available addresses -> keccak256 Algorithm = Really big number
+
+  ```javascript
+  uint256(
+    keccak256(abi.encodePacked(block.difficulty, block.timestamp, players))
+  );
+  ```
+
+  [Hashing with Keccak256](https://solidity-by-example.org/hashing)
+
+-
+
 # 0_boilerPlate
 
 - set up basic code for an ethereum/solidity development and testing environment
@@ -39,35 +133,39 @@ testing the contract
     Main mocha functions: it :: describe :: beforeEach
   - ganache
   - web3
-    -- What is Web3 and what is it used for?
+    -- _What is Web3 and what is it used for?_
     It is a JavaScript library that is used to deploy smart contract to blockchains like Ethereum. Web3 can also be used to interact with already deployed smart contracts on Ethereum or other EVM compatible blockchain [?]
     The requirements for deploying a contract and interacting with an already deployed smart contract are different. In both cases though an ABI is needed.
-    -- What is a web3 Provider and why is it needed?
+    -- _What is a web3 Provider and why is it needed?_
     -- What is web3.eth?
     -- Almost all web3 functions are asynchronous and therefore return a promise
 
 - Structure of a compiled contract:
 
-        `{
-       contracts: {
-         ':Inbox': {
-           assembly: [Object],
-           bytecode:bytecode,
-           functionHashes: [Object],
-           gasEstimates: [Object],
-           interface: '',
-           metadata: ''
-           opcodes: '',
-           runtimeBytecode: '',
-           srcmap: '',
-           srcmapRuntime: ''
-         }
-       },
-       sourceList: [ '' ],
-       sources: { '': { AST: [Object] } }
-      }`
+  ```javascript
+  {
+  contracts: {
+  ':Inbox': {
+  assembly: [Object],
+  bytecode:bytecode,
+  functionHashes: [Object],
+  gasEstimates: [Object],
+  interface: '',
+  metadata: ''
+  opcodes: '',
+  runtimeBytecode: '',
+  srcmap: '',
+  srcmapRuntime: ''
+  }
+  },
+  sourceList: [ '' ],
+  sources: { '': { AST: [Object] } }
 
-  - The interface property in the object is the ABI of the contract
+  }
+
+  ```
+
+- The interface property in the above object is the ABI of the contract
 
 - What is the ABI?
 
@@ -406,3 +504,5 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 `message()` property is a function to retreive the value of the 'message variable'
 
 3. What is a Rinkeby Faucet?
+
+4. What are denominations of ETH?
