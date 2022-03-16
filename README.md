@@ -8,7 +8,8 @@
 - uint (256)
 - fixed/ufixed
 - address: these are not simple string values but have methods attached to it, just like there are methods attached to arrays in JavaScript
-  - address
+  - address.transfer
+  - address.
 
 ##### Reference Types:
 
@@ -39,6 +40,8 @@
 - memory
 - storage
 - calldata
+- **this**: refers to the current contract
+  - **address(this).balance**: references all the ETH available in the contract
 
 ##### Visibility of Variables
 
@@ -506,3 +509,5 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 3. What is a Rinkeby Faucet?
 
 4. What are denominations of ETH?
+
+5. How is money stored in an Ethereum smart contract (i.e. contract balance)?
