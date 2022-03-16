@@ -1,15 +1,31 @@
 const path = require('path');
-const fs = require ('fs');
-// solidity compiler
 const solc = require('solc');
+const fs = require('fs');
 
-// get contract file so it can be read line by line not as JS code
-const contractPath = path.resolve(__dirname, 'contracts', 'SimpleContract.sol');
+/**
+ * Returns and Object describing what to compile and what need to be returned.
+ */
 
-// read solidity code
-// arguments: file, encoding type
-const source = fs.readFileSync(contractPath, 'utf8');
+let input = {
+        language: 'Solidity',
+        sources: {
+            'Lottery.sol': {
+                content: fs.readFileSync(path.resolve(__dirname, 'contracts', 'Lottery.sol'), 'utf8')
+            },
+        },
+        settings: {
+            outputSelection: { // return everything
+                '*': {
+                    '*': ['*']
+                }
+            }
+        }
+    };
 
-// compile contract and export 
-// arguments: source code, number of contracts to compile
-module.exports = solc.compile(source, 1).contracts[':SimepleContract']
+console.log(`Compiling contract...`)
+
+// save compiled code to output
+let output = JSON.parse(solc.compile(JSON.stringify(input)));
+// export compiled contract
+module.exports = output.contracts['Lottery.sol'].Lottery
+// console.log(output.contracts['Lottery.sol'].Lottery)

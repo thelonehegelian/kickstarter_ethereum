@@ -112,6 +112,12 @@ _"All transactions on the Ethereum blockchain are deterministic state transition
 - compile.js --> script to compile the solidity code
 - deploy.js --> script to deploy bytecode to the evm
 
+Install required libraries
+
+```javascript
+npm install --save ganache-cli mocha web3@1.0.0-beta.37 solc@0.4.17
+```
+
 ### Contract Deployment
 
 compile the contract:
