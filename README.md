@@ -261,6 +261,7 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 
 - `web3.utils.toWei('0.02', 'ether')`
 - try and catch assertions
+- `web3.eth.getBalance()`
 
 ### FAQ
 

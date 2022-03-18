@@ -75,4 +75,27 @@ describe("Lottery", () => {
       assert(err);
     }
   });
+
+  // test: sends money to the winner and resets the players array
+  it("sends money to the winner and resets the players array", async () => {
+    // enter the lottery
+    await lotteryContract.methods.enter().send({
+      from: accounts[1],
+      value: web3.utils.toWei("2", "ether"),
+    });
+    // get balance of the player (account[1]) before winning the lottery
+    const initialBalance = await web3.eth.getBalance(accounts[1]);
+    //  pick winner, function is called bby the contract owner address
+    // this function should send the winning amount (i.e. 1 Ether) back to accounts[1] because that is the only player in the contract
+    await lotteryContract.methods.pickWinner().send({
+      from: accounts[0],
+      gas: "1000000",
+    });
+    // get balance of player (accounts[1]) after winning the lottery
+    const finalBalance = await web3.eth.getBalance(accounts[1]);
+    // difference between the balance before and after winning the lottery
+    const difference = finalBalance - initialBalance;
+    // accounting for the gas used
+    assert(difference > web3.utils.toWei("1.8", "ether"));
+  });
 });
