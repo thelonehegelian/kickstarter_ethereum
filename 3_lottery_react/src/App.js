@@ -16,28 +16,29 @@ class App extends React.Component {
   async componentDidMount() {
     // function calls are invoked from a default metamask address set during the initial setup
     // this means that the .call({from: ''}) does not need to have a 'from' field
-    const manager = await methods.manager.call();
+    const manager = await lottery.methods;
+    console.log(manager);
     // update state
     this.setState({ manager: manager });
   }
   render() {
-    console.log(web3.version); // version: 1.7.1
+    console.log(`Web3 version: ${web3.version}`); // version: 1.7.1
+    // web3.eth.getAccounts().then((accounts) => {
+    //   console.log("Connected", accounts);
+    // });
+
+    lottery.methods
+      .manager()
+      .call()
+      .then((managerAccount) => {
+        console.log(managerAccount);
+      });
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Lottery</h1>
+        <p>Hello, I am ze Manakher</p>
+        <br />
+        <p>My address is: </p>
       </div>
     );
   }
