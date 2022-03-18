@@ -6,11 +6,9 @@ import lottery from "./lotteryContract";
 
 class App extends React.Component {
   // Define initial state
-  constructor(props) {
-    super(props);
-
-    this.state = { manager: "" };
-  }
+  state = {
+    manager: "",
+  };
 
   // TODO: use setState and useEffect() and  for this call
   async componentDidMount() {
