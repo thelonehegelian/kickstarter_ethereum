@@ -63,4 +63,16 @@ describe("Lottery", () => {
       assert(err);
     }
   });
+
+  // test: only manager can call the pickWinner function
+  it("only manager can call pickWinner", async () => {
+    try {
+      await lotteryContract.methods.pickWinner().send({
+        from: accounts[5],
+      });
+      assert(false);
+    } catch (err) {
+      assert(err);
+    }
+  });
 });
