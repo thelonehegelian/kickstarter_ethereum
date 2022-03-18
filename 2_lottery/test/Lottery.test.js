@@ -97,5 +97,10 @@ describe("Lottery", () => {
     const difference = finalBalance - initialBalance;
     // accounting for the gas used
     assert(difference > web3.utils.toWei("1.8", "ether"));
+
+    // players array should e empty now
+    const playersArray = await lotteryContract.methods.getPlayers().call();
+    // playersArray length should be 0
+    assert.equal(playersArray.length, 0);
   });
 });
