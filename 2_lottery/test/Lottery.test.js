@@ -10,9 +10,7 @@ const web3 = new Web3(ganache.provider());
 // JSON.parse won't be needed as parsed it during the compilation process in compile.js
 const { interface, bytecode } = require("../compile");
 
-// console.log(bytecode);
 // variables
-console.log(interface);
 let accounts;
 let lotteryContract;
 let txReceipt;
@@ -32,6 +30,11 @@ describe("Lottery", () => {
   it("deploys a contract", () => {
     // test to see if the contract has an address, if it does then it was deployed successfully
     assert.ok(lotteryContract.options.address);
+  });
+
+  it("has a manager who is the creator of the contract", async () => {
+    let managerAddress = await lotteryContract.methods.manager().call();
+    assert.equal(accounts[0], managerAddress);
   });
   // test to see if the user who invoked the enter function was entered to the lottery
   it("enters a player to the lottery", async () => {
