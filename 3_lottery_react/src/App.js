@@ -8,6 +8,7 @@ class App extends React.Component {
   // Define initial state
   state = {
     manager: "",
+    players: [],
   };
 
   // TODO: use setState and useEffect() and  for this call
@@ -15,9 +16,10 @@ class App extends React.Component {
     // function calls are invoked from a default metamask address set during the initial setup
     // this means that the .call({from: ''}) does not need to have a 'from' field
     const manager = await lottery.methods;
+    const platers = await lottery.methods.getPlayers().call();
     console.log(manager);
     // update state
-    this.setState({ manager: manager });
+    this.setState({ manager: manager, players: players });
   }
   render() {
     console.log(`Web3 version: ${web3.version}`); // version: 1.7.1
