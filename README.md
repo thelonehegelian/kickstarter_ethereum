@@ -268,7 +268,9 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 ### Ethereum Web Application Architecture
 
 - Browser focused code
--
+- Assume user has MetaMask installed
+- If MetaMask is installed in the browser, it will inject web3 library into the browser
+- Our Web3 version (on the react app) is used to override the default (older) version of MetaMask
 
 ### FAQ
 
