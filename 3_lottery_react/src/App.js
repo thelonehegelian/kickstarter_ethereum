@@ -9,6 +9,7 @@ class App extends React.Component {
   state = {
     manager: "",
     players: [],
+    balance: "",
   };
 
   // TODO: use setState and useEffect() and  for this call
@@ -17,10 +18,11 @@ class App extends React.Component {
     // this means that the .call({from: ''}) does not need to have a 'from' field
     const manager = await lottery.methods;
     const players = await lottery.methods.getPlayers().call();
+    // this will be an object wrapped in BigNumber.js library
     const balance = await web3.eth.getBalance(lottery.options.address);
     console.log(balance);
     // update state
-    this.setState({ manager: manager, players: players });
+    this.setState({ manager: manager, players: players.length });
   }
   render() {
     console.log(`Web3 version: ${web3.version}`); // version: 1.7.1
@@ -40,6 +42,12 @@ class App extends React.Component {
         <p>Hello, I am ze Manakher</p>
         <br />
         <p>My address is: </p>
+        <br />
+        <p>
+          There are currently {this.state.players} players in the lottery,
+          {/*Coverts wei to ether*/}
+          playing to win {web3.utils.fromWei(this.state.balance, "ether")}
+        </p>
       </div>
     );
   }
