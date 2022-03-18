@@ -1,3 +1,4 @@
+const fs = require("fs");
 const assert = require("assert");
 const ganache = require("ganache-cli");
 // web3 is a constructor function
