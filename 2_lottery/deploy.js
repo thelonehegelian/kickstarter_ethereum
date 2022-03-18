@@ -28,7 +28,7 @@ const deploy = async () => {
   const accounts = await web3.eth.getAccounts();
   console.log(`Attempting to deploy contract from ${accounts[0]}`);
   // Is there a transaction receipt at deployment?
-  const result = await new web3.eth.Contract(JSON.parse(interface))
+  const result = await new web3.eth.Contract(interface)
     .deploy({
       data: bytecode,
     })
@@ -38,7 +38,7 @@ const deploy = async () => {
   */
 
   // console log contracts ABI
-  console.log(`Contract ABI: ${interface}`);
+  console.log(interface);
   // console logs the ethereum address of the deployed contract
   console.log(
     `Contract deployed to the following address: ${result.options.address}`

@@ -11,7 +11,7 @@ const { interface, bytecode } = require("../compile");
 
 // console.log(bytecode);
 // variables
-
+console.log(interface);
 let accounts;
 let lotteryContract;
 let txReceipt;
