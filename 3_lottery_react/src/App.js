@@ -16,8 +16,9 @@ class App extends React.Component {
     // function calls are invoked from a default metamask address set during the initial setup
     // this means that the .call({from: ''}) does not need to have a 'from' field
     const manager = await lottery.methods;
-    const platers = await lottery.methods.getPlayers().call();
-    console.log(manager);
+    const players = await lottery.methods.getPlayers().call();
+    const balance = await web3.eth.getBalance(lottery.options.address);
+    console.log(balance);
     // update state
     this.setState({ manager: manager, players: players });
   }
