@@ -29,20 +29,38 @@ beforeEach(async () => {
 // test to validate contract deployment
 describe("Lottery", () => {
   it("deploys a contract", () => {
-    // check to see if the contract has an address, if it does then it was deployed successfully
+    // test to see if the contract has an address, if it does then it was deployed successfully
     assert.ok(lotteryContract.options.address);
   });
   // test to see if the user who invoked the enter function was entered to the lottery
   it("enters a player to the lottery", async () => {
     // this contract requires minimum 0.11 ETH to participate
+    // 'value' is the amount of Ether sent to the contract at function invocation
     await lotteryContract.methods.enter().send({
       from: accounts[1],
       gas: "1000000",
       value: web3.utils.toWei("0.2", "ether"),
     });
     // const player = await lotteryContract.methods.players(0).call();
+    // this works too
     const players = await lotteryContract.methods.getPlayers().call();
     assert.equal(1, players.length);
     assert.equal(players[0], accounts[1]);
+  });
+
+  // TODO: test to see if multiple users can enter the lottery
+  // it("it allows multiple users to enter lottery", async () => {});
+
+  // test to confirm that ether is sent to enter lottery
+  it("requires the minimum amount of Ether to enter", async () => {
+    try {
+      await lotteryContract.methods.enter().send({
+        from: accounts[1],
+        gas: "1000000",
+      });
+      assert(false);
+    } catch (err) {
+      assert(err);
+    }
   });
 });
