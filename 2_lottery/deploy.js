@@ -33,10 +33,10 @@ const deploy = async () => {
       data: bytecode,
     })
     .send({ gas: "1000000", from: accounts[0] });
+
   /*
   Maybe better to produce a json file with this information?
   */
-
   // console log contracts ABI
   console.log(interface);
   // console logs the ethereum address of the deployed contract
