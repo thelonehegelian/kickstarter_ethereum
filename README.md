@@ -263,6 +263,13 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 - try and catch assertions
 - `web3.eth.getBalance()`
 
+# 3_Lottery_Front_End
+
+### Ethereum Web Application Architecture
+
+- Browser focused code
+-
+
 ### FAQ
 
 1. What happens when a contract is deployed using the Web3 library?
