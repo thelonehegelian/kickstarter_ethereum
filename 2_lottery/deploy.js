@@ -31,9 +31,14 @@ const deploy = async () => {
   const result = await new web3.eth.Contract(JSON.parse(interface))
     .deploy({
       data: bytecode,
-      arguments: [], // argument for the constructor function
     })
     .send({ gas: "1000000", from: accounts[0] });
+  /*
+  Maybe better to produce a json file with this information?
+  */
+
+  // console log contracts ABI
+  console.log(`Contract ABI: ${interface}`);
   // console logs the ethereum address of the deployed contract
   console.log(
     `Contract deployed to the following address: ${result.options.address}`

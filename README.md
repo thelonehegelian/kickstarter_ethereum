@@ -69,15 +69,15 @@
 - **public**
 - **contract**
 - **msg**
-- **payable**: used with a function that requires specific amount of Ether to be sent at function invocation (this is separate from the gas fee)
+- **_payable_**: used with a function that requires specific amount of Ether to be sent at function invocation (this is separate from the gas fee)
 - **require**:
 - **ether**
 - **new**
-- ** modifier**
+- **modifier**
 
 #### The Randomness Problem
 
-- Why is simulating randomness a problem with Solidity and Etereum?
+- Why is simulating randomness a problem with Solidity and Ethereum?
 
 _From Master Ethereum:_
 
@@ -195,7 +195,7 @@ testing the contract
 
 # 1_Inbox
 
-- What does an ethereum transaction look like?
+- What does an Ethereum transaction look like?
 - What is the difference between calling a function and sending a transaction?
 - What happens when we send a transaction to a function or any other transaction?
 
@@ -269,8 +269,31 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 
 - Browser focused code
 - Assume user has MetaMask installed
-- If MetaMask is installed in the browser, it will inject web3 library into the browser
-- Our Web3 version (on the react app) is used to override the default (older) version of MetaMask
+- If MetaMask is installed in the browser, it will inject web3 library into the browser. Our Web3 version (on the react app) is used to override the default (older) version of MetaMask
+
+The component below allows us to connect to MetaMask
+
+```javascript
+import Web3 from "web3";
+
+window.ethereum.request({ method: "eth_requestAccounts" });
+
+const web3 = new Web3(window.ethereum);
+
+export default web3;
+```
+
+At reload MetaMask will open asking for permission to connect
+
+Console logs MetaMask account currently available (only the connected account)
+
+`web3.eth.getAccounts().then(console.log);`
+
+- working with deployed contracts using Web3
+
+  `new web3.eth.Contract(contractAbi, addressOfTheContract)`
+
+---
 
 ### FAQ
 

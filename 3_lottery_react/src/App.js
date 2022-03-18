@@ -6,6 +6,8 @@ import web3 from "./web3";
 class App extends React.Component {
   render() {
     console.log(web3.version); // version: 1.7.1
+
+    web3.eth.getAccounts().then(console.log);
     return (
       <div className="App">
         <header className="App-header">
