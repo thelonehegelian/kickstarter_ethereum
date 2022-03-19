@@ -34,6 +34,8 @@ class App extends React.Component {
     event.preventDefault();
     // this gets the connected accounts from the users Metamask
     const accounts = await web3.eth.getAccounts();
+    // message for the user to wait until the transaction is complete
+    this.setState({message: 'Waiting for the transaction to be completed})
 
     // enter lottery by sending a transaction with specific amount of ETH
     await lottery.methods.enter().send({
@@ -42,7 +44,6 @@ class App extends React.Component {
       // the user enter the amount in ETH, so needs to be converted to Wei
       value: web3.utils.toWei(this.state.value, "ether"),
     });
-    console.log(accounts[0]);
   };
   render() {
     console.log(`Web3 version: ${web3.version}`); // version: 1.7.1

@@ -232,7 +232,7 @@ testing the contract
   "The Ethereum Application Program Interface (API) on Infura gives users access to methods for sending transactions to the Ethereum blockchain. This is done via the JavaScript Object Notation Remote Procedure Call (JSON-RPC) API, allowing for the reading and writing data to the network, and executing smart contracts. These API calls will work for Ethereum Mainnet; Ethereum testnets, including Rinkeby, Kovan, Görli, and Ropsten; and JSON-RPC compatible L2’s such as Polygon, Optimism, and Arbitrum."
   "These API calls apply to the execution engine (also known as the Execution layer) post-merge with the Ethereum beacon chain."
 
-**My understanding of Infura so far...**
+**My understanding of Infura... so far**
 Each Ethereum node is a client (a software application). To interact with the Ethereum blockchain one needs access to an Ethereum node (client). Most of the Ethereum nodes are run privately by companies or private individuals etc, which means one would have to download an Ethereum node to work with the blockchain (A full node is not necessary even if a node is required).
 Infura is a cloud-based Ethereum node. It is accessible to users for development and deployment of contracts. Such users may not have the resources to run a full node etc...
 
@@ -271,7 +271,7 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
 - Assume user has MetaMask installed
 - If MetaMask is installed in the browser, it will inject web3 library into the browser. Our Web3 version (on the react app) is used to override the default (older) version of MetaMask
 
-The component below allows us to connect to MetaMask
+_The component below allows us to connect to MetaMask_
 
 ```javascript
 import Web3 from "web3";
@@ -292,6 +292,11 @@ Console logs MetaMask account currently available (only the connected account)
 - working with deployed contracts using Web3
 
   `new web3.eth.Contract(contractAbi, addressOfTheContract)`
+
+**Sending transactions**
+
+- .send() method requires a 'from' account
+  - value field requires amount in Wei
 
 ---
 
