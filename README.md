@@ -104,7 +104,7 @@ _"All transactions on the Ethereum blockchain are deterministic state transition
 - .deploy() : deploys a contract
 - .send() : sends a transaction (function calls that change the state of the blockchain)
 - .call() : calls a function that does not change the state of the blockchain
-- web3.utils.toWei()
+- `web3.utils.toWei()`
 
 ---
 
@@ -126,7 +126,7 @@ _"All transactions on the Ethereum blockchain are deterministic state transition
 Install required libraries
 
 ```javascript
-npm install --save ganache-cli mocha web3@1.0.0-beta.37 solc@0.4.17
+npm install --save ganache-cli mocha web3 solc
 ```
 
 ### Contract Deployment
