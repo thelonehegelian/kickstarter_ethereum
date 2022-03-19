@@ -11,6 +11,7 @@ class App extends React.Component {
     players: [],
     balance: "",
     value: "",
+    message: "",
   };
 
   // TODO: use setState and useEffect() and  for this call
@@ -35,8 +36,7 @@ class App extends React.Component {
     // this gets the connected accounts from the users Metamask
     const accounts = await web3.eth.getAccounts();
     // message for the user to wait until the transaction is complete
-    this.setState({message: 'Waiting for the transaction to be completed})
-
+    this.setState({ message: "Waiting for the transaction to complete..." });
     // enter lottery by sending a transaction with specific amount of ETH
     await lottery.methods.enter().send({
       from: accounts[0],
@@ -44,6 +44,8 @@ class App extends React.Component {
       // the user enter the amount in ETH, so needs to be converted to Wei
       value: web3.utils.toWei(this.state.value, "ether"),
     });
+    // update message once the transaction has completed
+    this.setState({ message: "You have entered the Lottery" });
   };
   render() {
     console.log(`Web3 version: ${web3.version}`); // version: 1.7.1
@@ -69,6 +71,8 @@ class App extends React.Component {
           <input />
           <button>Enter</button>
         </form>
+        <hr />
+        <h1>{this.state.message}</h1>
       </div>
     );
   }
