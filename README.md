@@ -251,17 +251,35 @@ To sum: Infura is a cloud-based Ethereum client that gives users access to the E
   - Once the compile succeeds, you have to be on the same network that the contract is, by setting your MetaMask account properly.
   - The last thing to do is paste the contract address on the option: Load from address: and you'll get it on remix to interact with it.
 
+---
+
 # 2_Lottery
 
 **Description**
 
-**Working with latest version of Solc**
+The creator of the smart contract is also the manager of the lottery.
+
+Only Manager is allowed to pick the winner
+
+### Functions
+
+### Variables
+
+### Requirements
+
+Users need to send a transaction worth 0.1 ETH (100000000000000000 Wei) to enter the lottery
+
+---
 
 **Important bits**
 
 - `web3.utils.toWei('0.02', 'ether')`
 - try and catch assertions
 - `web3.eth.getBalance()`
+
+## **Working with latest version of Solc**
+
+---
 
 # 3_Lottery_Front_End
 
