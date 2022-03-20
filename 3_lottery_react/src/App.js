@@ -12,7 +12,7 @@ class App extends React.Component {
     balance: "",
     value: "",
     message: "",
-    connectedAccount: "",
+    connectedAccount: "", // is this okay security-wise?  (ㆆ_ㆆ) addresses are public anyway
   };
 
   // TODO: use setState and useEffect() for this call
@@ -34,6 +34,8 @@ class App extends React.Component {
       balance: balance,
       connectedAccount: connectedAccount[0],
     });
+    // console logs current web3 version
+    console.log(`Web3 version: ${web3.version}`); // version: 1.7.1
   }
 
   // form submit handler
@@ -56,11 +58,18 @@ class App extends React.Component {
     this.setState({ message: "You have entered the Lottery" });
   };
   render() {
-    console.log(`Web3 version: ${web3.version}`); // version: 1.7.1
-    // console logs the connected metamsk account
-    // web3.eth.getAccounts().then((accounts) => {
-    //   console.log("Connected", accounts);
-    // });
+    // Conditional render of pick winner button
+    // renders only if connected metamask address == manager address
+    const pickWinnerButton = () => {
+      const { manager, connectedAccount } = this.state;
+      let renderButton =
+        manager == connectedAccount ? (
+          // the button calls the handlePickWinner function
+          <button onClick={this.handlePickWinner}>Pick Winner</button>
+        ) : null;
+      return renderButton;
+    };
+
     return (
       <div className="App">
         {/*Heading*/}
@@ -87,6 +96,9 @@ class App extends React.Component {
           />
           <button>Enter</button>
         </form>
+        <hr />
+        {/*This should only be visible if the connected MetaMask address is that of the Manager*/}
+        {pickWinnerButton()}
         <hr />
         {/*Message to inform the user about the status of the transaction*/}
         <h1>{this.state.message}</h1>
