@@ -56,22 +56,32 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        {/*Heading*/}
         <h1>Lottery</h1>
         <p>Hello, I am ze Manakher</p>
         <br />
-        <p>My address is:</p>
+        <p>My address is: {this.state.manager}</p>
         <br />
+        {/*Introduction the lottery*/}
         <p>
-          There are currently {this.state.players}
-          players in the lottery, {/* Coverts wei to ether */}
+          There are currently {this.state.players} players in the lottery,{" "}
+          {/* Coverts wei to ether */}
           playing to win {web3.utils.fromWei(this.state.balance, "ether")}
         </p>
+        {/*Form to enter the Lottery*/}
         <form onSubmit={this.onSubmit}>
           <label>Amount of Ether to enter</label>
-          <input />
+          {/*Form input*/}
+          <input
+            onChange={(event) => {
+              this.state.value = event.target.value;
+              console.log(this.state.value);
+            }}
+          />
           <button>Enter</button>
         </form>
         <hr />
+        {/*Message to inform the user about the status of the transaction*/}
         <h1>{this.state.message}</h1>
       </div>
     );
