@@ -21,12 +21,19 @@ class App extends React.Component {
     const manager = await lottery.methods.manager().call();
     //BUG: currently this is rturning an empty array for some reason
     console.log(manager);
-    const players = await lottery.methods.getPlayers().call();
+    const players = await lottery.methods;
+
+    console.log(`Players: ${players.length}`);
     // this will be an object wrapped in BigNumber.js library
     const balance = await web3.eth.getBalance(lottery.options.address);
-    console.log(balance);
+    this.setState({});
+    console.log(`Balance: ${balance}`);
     // update state
-    this.setState({ manager: manager, players: players.length });
+    this.setState({
+      manager: manager,
+      players: players.length,
+      balance: balance,
+    });
   }
   // form submit handler
   // with arrow function syntax: this = component
@@ -53,7 +60,6 @@ class App extends React.Component {
     // web3.eth.getAccounts().then((accounts) => {
     //   console.log("Connected", accounts);
     // });
-
     return (
       <div className="App">
         {/*Heading*/}
@@ -67,6 +73,7 @@ class App extends React.Component {
           There are currently {this.state.players} players in the lottery,{" "}
           {/* Coverts wei to ether */}
           playing to win {web3.utils.fromWei(this.state.balance, "ether")}
+          ETH
         </p>
         {/*Form to enter the Lottery*/}
         <form onSubmit={this.onSubmit}>
@@ -75,7 +82,6 @@ class App extends React.Component {
           <input
             onChange={(event) => {
               this.state.value = event.target.value;
-              console.log(this.state.value);
             }}
           />
           <button>Enter</button>
