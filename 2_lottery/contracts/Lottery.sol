@@ -23,7 +23,7 @@ contract Lottery {
     // the 'payable' keyword makes the function so that it requires Ether to be sent to a given address
     function enter () public payable {
         // set limit to enter lottery
-        require(msg.value > 0.1 ether); // 0.1 ether = 110000000000000000 wei
+        require(msg.value > 0.1 ether); // 0.1 ether = 100000000000000000 wei
         // make msg.sender payable
         players.push(payable(msg.sender));
     }
