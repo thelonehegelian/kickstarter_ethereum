@@ -14,20 +14,15 @@ class App extends React.Component {
     message: "",
   };
 
-  // TODO: use setState and useEffect() and  for this call
+  // TODO: use setState and useEffect() for this call
   async componentDidMount() {
     // function calls are invoked from a default metamask address set during the initial setup
     // this means that the .call({from: ''}) does not need to have a 'from' field
     const manager = await lottery.methods.manager().call();
-    //BUG: currently this is rturning an empty array for some reason
-    console.log(manager);
-    const players = await lottery.methods;
-
-    console.log(`Players: ${players.length}`);
+    const players = await lottery.methods.getPlayers().call();
+    // gets balance of the contract, this is also the sum of ETH all the players sent when they entered
     // this will be an object wrapped in BigNumber.js library
     const balance = await web3.eth.getBalance(lottery.options.address);
-    this.setState({});
-    console.log(`Balance: ${balance}`);
     // update state
     this.setState({
       manager: manager,
