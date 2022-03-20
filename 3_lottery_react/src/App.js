@@ -12,6 +12,7 @@ class App extends React.Component {
     balance: "",
     value: "",
     message: "",
+    connectedAccount: "",
   };
 
   // TODO: use setState and useEffect() for this call
@@ -23,13 +24,18 @@ class App extends React.Component {
     // gets balance of the contract, this is also the sum of ETH all the players sent when they entered
     // this will be an object wrapped in BigNumber.js library
     const balance = await web3.eth.getBalance(lottery.options.address);
+    // get connected metamask account
+    const connectedAccount = await web3.eth.getAccounts();
+
     // update state
     this.setState({
       manager: manager,
       players: players.length,
       balance: balance,
+      connectedAccount: connectedAccount[0],
     });
   }
+
   // form submit handler
   // with arrow function syntax: this = component
   onSubmit = async (event) => {
