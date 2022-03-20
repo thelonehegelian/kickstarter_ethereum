@@ -35,21 +35,22 @@ const deploy = async () => {
     .send({ gas: "1000000", from: accounts[0] });
 
   /*
-  Maybe better to produce a json file with this information to have a record?
+  Maybe better to produce a json file with this information than console logging
   */
 
-  // let contract = JSON.stringify({
-  //   abi: interface,
-  //   address: result.options.address,
-  // });
-  // fs.writeFileSync("contract.json", contract);
+  let contract = JSON.stringify({
+    abi: interface,
+    address: result.options.address,
+  });
+  fs.writeFileSync("contract.json", contract);
+  //
+  // // console log contracts ABI
+  // console.log(interface);
+  // // console logs the ethereum address of the deployed contract
+  // console.log(
+  //   `Contract deployed to the following address: ${result.options.address}`
+  // );
 
-  // console log contracts ABI
-  console.log(interface);
-  // console logs the ethereum address of the deployed contract
-  console.log(
-    `Contract deployed to the following address: ${result.options.address}`
-  );
   // to prevent hanging developement
   provider.engine.stop();
 };
