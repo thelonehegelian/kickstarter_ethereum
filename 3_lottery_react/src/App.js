@@ -57,13 +57,19 @@ class App extends React.Component {
     // update message once the transaction has completed
     this.setState({ message: "You have entered the Lottery" });
   };
+
+  // pickWinner handler
+  // calls the pickWinner function on the lottery contract
+  handlePickWinner = () => {
+    console.log("handlePickWinner Called");
+  };
   render() {
     // Conditional render of pick winner button
     // renders only if connected metamask address == manager address
     const pickWinnerButton = () => {
       const { manager, connectedAccount } = this.state;
       let renderButton =
-        manager == connectedAccount ? (
+        manager === connectedAccount ? (
           // the button calls the handlePickWinner function
           <button onClick={this.handlePickWinner}>Pick Winner</button>
         ) : null;
