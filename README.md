@@ -283,6 +283,8 @@ Users need to send a transaction worth 0.1 ETH (100000000000000000 Wei) to enter
 
 # 3_Lottery_Front_End
 
+Note: In the Lottery contract there should be a variable for updating the winner of the lottery, so it can be displayed on the Front End
+
 ### Ethereum Web Application Architecture
 
 - Browser focused code
@@ -315,6 +317,8 @@ Console logs MetaMask account currently available (only the connected account)
 
 - .send() method requires a 'from' account
   - value field requires amount in Wei
+
+* What is the difference between declaring functions within the component's render() and declaring function above it (outside of it)? [copy this question to the intro-react readme]
 
 ---
 
