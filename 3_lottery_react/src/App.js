@@ -55,7 +55,7 @@ class App extends React.Component {
       value: web3.utils.toWei(this.state.value, "ether"),
     });
     // update message once the transaction has completed
-    this.setState({ message: "You have entered the Lottery" });
+    this.setState({ message: "Transaction completed successfully" });
   };
 
   // pickWinner handler
@@ -87,7 +87,7 @@ class App extends React.Component {
       <div className="App">
         {/*Heading*/}
         <h1>Lottery</h1>
-        <p>Hello, I am ze Manakher</p>
+        <p>Hello, I am the Manager</p>
         <br />
         <p>My address is: {this.state.manager}</p>
         <br />
