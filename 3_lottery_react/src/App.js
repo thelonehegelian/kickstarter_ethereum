@@ -54,6 +54,7 @@ class App extends React.Component {
       // the user enter the amount in ETH, so needs to be converted to Wei
       value: web3.utils.toWei(this.state.value, "ether"),
     });
+    // TODO: the entire state should update here, the application should display updated data
     // update message once the transaction has completed
     this.setState({ message: "Transaction completed successfully" });
   };
@@ -67,6 +68,10 @@ class App extends React.Component {
     await lottery.methods
       .pickWinner()
       .send({ from: this.state.connectedAccount });
+    // TODO: the entire state should update here, the application should display updated data
+    /* Currently the app is set up in such a way that the state is filled up at component render
+        that is when the data is pulled from the the contract
+      */
     this.setState({ message: "A winner has been picked!" });
   };
 
