@@ -40,6 +40,8 @@ contract Lottery {
         uint randomIndex = random()%players.length;
         // send all the contract balance to the winner of the lottery
         players[randomIndex].transfer(address(this).balance);
+        /* TODO: */
+        /* there should be a variable to save and display the winner of the lottery*/
         // Empty the players array so a new round of lottery can be started
         players = new address payable[] (0);
     }
