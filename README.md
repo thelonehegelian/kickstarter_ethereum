@@ -322,6 +322,26 @@ Console logs MetaMask account currently available (only the connected account)
 
 ---
 
+
+### 4_Kickstarter_Campaign
+
+VARIABLES
+---------
+- manager => address [who is the manager in the real world application?]
+- minimumContribution => uint
+- approvers => address array
+- requests => Request []
+
+FUNCTIONS
+---------
+- Campaign => constructor
+- contribute => function to allow users to participate in the Campaign
+- createRequest => Called by the manager to create a 'spending request' [how to determine a valid spending request in the real world?]
+- approveRequest => Called by the contributors to approve a spending request 
+- finalizeRequest => Called by the manager once the spending request has been approved
+
+
+
 ### FAQ
 
 1. What happens when a contract is deployed using the Web3 library?

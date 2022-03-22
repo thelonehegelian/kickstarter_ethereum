@@ -13,8 +13,7 @@ class App extends React.Component {
     value: "",
     message: "",
     connectedAccount: "", // is this okay security-wise?  (ㆆ_ㆆ) addresses are public anyway
-  };
-
+  };  
   // TODO: use setState and useEffect() for this call
   async componentDidMount() {
     // function calls are invoked from a default metamask address set during the initial setup
