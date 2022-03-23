@@ -19,13 +19,44 @@
   - there is a limitation on nested arrays due to the Web3 bridge between JavaScript and Solidity
   - strings a dynamic arrays, which means the above limitation would apply to array of strings e.g. ['hello', 'how', 'are', 'ya', '!']. This won't work
 - mapping
-- struct
+- **_struct_**
+
+```javascript
+    /* 
+      EXAMPLE OF A STRUCT
+    */
+    struct Request {
+        string description;
+        uint value; // in Wei
+        address recipient;
+        bool completed; 
+    }
+
+    /* 
+      USING A STRUCT (INSIDE A FUNCTION)
+    */
+    function createRequest (string calldata _description , uint _value, address _recipient, bool _completed ) public restricted {
+        // create a request using the Request struct  
+        Request memory newRequest = Request({
+            description: _description,
+            value: _value, 
+            recipient: _recipient,
+            completed: _completed
+        });
+    }
+
+    // EXAMPLE OF AN ARRAY MADE OF REQUEST STRUCTS
+    Request [] public requests; // works like any other array
+
+```
 
 
 ### Functions 
 - **_memory_**: 
 - **_calldata_**:  Calldata is also a temporary data location in Solidity. It acts like memory, in terms of its dependence on the function's execution. The variables stored in calldata are only available inside the function they were declared in. On top of that, calldata variables are not modifiable.
+- **_storage_**
 
+Why does working with string within a function require "storage"?
 When to use memory and when to use calldata? 
 ##### Constructor function
 
