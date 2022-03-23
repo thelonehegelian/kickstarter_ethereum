@@ -22,6 +22,17 @@ contract Campaign {
     // minimum Contribution in Wei
     uint256 public minimumContribution;
 
+    // Request struct
+    // used to create a request for approval by the contributors
+    struct Request {
+        string description;
+        uint256 value;
+        address recipient;
+        bool completed;
+    }
+    // array of Request struct, works like any other array
+    Request[] public requests;
+
     /* 
     constructor function requires a minimum amount of ETH to create contract
      the Contract cannot be deployed without this minimum amount
@@ -39,7 +50,7 @@ contract Campaign {
     // send minimum amount of eth required to participate in the Campaign
     function contribute() public payable {
         // the amount sent at invocation should be larger that minimumContribution
-        // ADD REQUIRE STATEMENT MODIFIER HERE
+        // TODO: ADD REQUIRE STATEMENT MODIFIER HERE
         require(msg.value > minimumContribution);
         // push the function invocators address to the contributors array
         approvers.push(payable(msg.sender));
