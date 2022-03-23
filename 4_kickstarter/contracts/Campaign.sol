@@ -16,14 +16,14 @@ contract Campaign {
     // manager is also the creator of the contract
     address payable public manager;
     // approvers array updated at approveRequest function call
-    // TODO: !each address needs to be mapped to the amount of money each approver contributed
+    // !each address needs to be mapped to the amount of money each approver contributed
     address payable[] public approvers;
     address[] public contributors;
     // minimum Contribution in Wei
     uint256 public minimumContribution;
-
     // Request struct
     // used to create a request for approval by the contributors
+    // A request can only be created by a manager
     struct Request {
         string description;
         uint256 value;
@@ -32,6 +32,12 @@ contract Campaign {
     }
     // array of Request struct, works like any other array
     Request[] public requests;
+
+    // modifier to restrict fucntion invocation
+    modifier restricted() {
+        require(msg.sender == manager);
+        _;
+    }
 
     /* 
     constructor function requires a minimum amount of ETH to create contract
@@ -50,7 +56,7 @@ contract Campaign {
     // send minimum amount of eth required to participate in the Campaign
     function contribute() public payable {
         // the amount sent at invocation should be larger that minimumContribution
-        // TODO: ADD REQUIRE STATEMENT MODIFIER HERE
+        // ADD REQUIRE STATEMENT MODIFIER HERE
         require(msg.value > minimumContribution);
         // push the function invocators address to the contributors array
         approvers.push(payable(msg.sender));
