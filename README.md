@@ -21,6 +21,25 @@
 - mapping
 - struct
 
+
+### Functions 
+- **_memory_**: 
+- **_calldata_**:  Calldata is also a temporary data location in Solidity. It acts like memory, in terms of its dependence on the function's execution. The variables stored in calldata are only available inside the function they were declared in. On top of that, calldata variables are not modifiable.
+
+When to use memory and when to use calldata? 
+##### Constructor function
+
+- Constructor function is deprecated in the new version of solidity. In older version it had to be something like this:
+  ```javascript
+  contract Lotto {
+    // constructor function
+    function Lotto() public {}
+  }
+  ```
+- _What does a constructor function do?_
+
+
+
 ##### Global Variables/Functions
 
 - **msg** variable has the following methods attached to it:
@@ -49,16 +68,6 @@
   - when a variable is set to public a function is generated to provide access to the public variable.
 - private
 
-##### Constructor function
-
-- Constructor function is deprecated in the new version of solidity. In older version it had to be something like this:
-  ```javascript
-  contract Lotto {
-    // constructor function
-    function Lotto() public {}
-  }
-  ```
-- _What does a constructor function do?_
 
 ##### Keywords
 
