@@ -26,7 +26,7 @@ contract Campaign {
     // A request can only be created by a manager
     struct Request {
         string description;
-        uint256 value;
+        uint256 value; // in Wei
         address recipient;
         bool completed;
     }
@@ -63,7 +63,22 @@ contract Campaign {
     }
 
     // Called by the manager to create a 'spending request' [how to determine a valid spending request in the real world?]
-    function createRequest() public {}
+    function createRequest(
+        string calldata _description,
+        uint256 _value,
+        address _recipient
+    ) public restricted {
+        // create a request using the Request struct
+        Request memory newRequest = Request({
+            description: _description,
+            value: _value, // value is in Wei
+            recipient: _recipient,
+            completed: false // set initial value to false
+        });
+
+        // push the request in to the request array
+        requests.push(newRequest);
+    }
 
     // Called by the contributors to approve a spending request
     function approveRequest() public {}
