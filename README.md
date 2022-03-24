@@ -19,6 +19,7 @@
 - bool
 - int
 - uint (256)
+  - Other uint types
 - fixed/ufixed
 - address: these are not simple string values but have methods attached to it, just like there are methods attached to arrays in JavaScript
   - address.transfer
@@ -26,17 +27,24 @@
 
 ##### Reference Types:
 
-- arrays: fixed and dynamic
+**_arrays_**: fixed and dynamic
   - arrays have methods attached to them, e.g. push, length
   - note: the access function created for us to access arrays does not return the whole array but requires an index to return the value
   - there is a limitation on nested arrays due to the Web3 bridge between JavaScript and Solidity
   - strings a dynamic arrays, which means the above limitation would apply to array of strings e.g. ['hello', 'how', 'are', 'ya', '!']. This won't work
-- **_mapping**_
+
+**_mapping**_
   - Why mapping maybe preferrable to an array? 
     - Avoids looping through dynamic array which cost a lot of gas (money).
   - What is Constant Time Search compared to Linear Time Search?
-  -   
-- **_struct_**
+  - Keys are note stored with values 
+  - Mappings are Hash Tables
+  - What is the function of pointers in Mappings? 
+  - In Mappings we cannot get a list of values (unlike in JavaScript objects)
+  - For non existent values, a mapping key would return a default value. The default value depends on the value-type of all the values in the mapping. If it is a mapping of strings the default value would be an empty string "", with Booleans default value is 'False', and so on.
+  - 
+  
+**_struct_**
   - Why use structs?
     - Similar to Classes in other languages
     - Encapsulation 
@@ -70,12 +78,15 @@
     Request [] public requests; // works like any other array
 
 ```
+
+- How to resolve error: TypeError: Struct containing a (nested) mapping cannot be constructed
+- 
 ### Loops and Conditional Programming 
 
 - **for**
 - **while**
   - Loops inside Solidity can become costly, especially if used to iterate over a dynamic array whose size may increase
-  - 
+  - However, searching (interation of an array) and indexing are two different operations. Indexing (i.e. providing the index of the element in an array) can work like key => value pair and would not cost any gas. This is a Contant Time operation
 
 ### Functions 
 - **_memory_**: 
