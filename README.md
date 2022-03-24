@@ -36,7 +36,7 @@
       USING A STRUCT (INSIDE A FUNCTION)
     */
     function createRequest (string calldata _description , uint _value, address _recipient, bool _completed ) public restricted {
-        // create a request using the Request struct  
+        // create a request using the Request struct. This creates an instance of a Request called newRequest        
         Request memory newRequest = Request({
             description: _description,
             value: _value, 
@@ -49,7 +49,12 @@
     Request [] public requests; // works like any other array
 
 ```
+### Loops and Conditional Programming 
 
+- **for**
+- **while**
+  - Loops inside Solidity can become costly, especially if used to iterate over a dynamic array whose size may increase
+  - 
 
 ### Functions 
 - **_memory_**: 
@@ -301,15 +306,15 @@ The creator of the smart contract is also the manager of the lottery.
 
 Only Manager is allowed to pick the winner
 
-### Functions
+#### Structure and ... of the contract
+  ### Functions
 
-### Variables
+  ### Variables
 
-### Requirements
+  ### Requirements
 
-Users need to send a transaction worth 0.1 ETH (100000000000000000 Wei) to enter the lottery
+  Users need to send a transaction worth 0.1 ETH (100000000000000000 Wei) to enter the lottery
 
----
 
 **Important bits**
 
@@ -317,7 +322,12 @@ Users need to send a transaction worth 0.1 ETH (100000000000000000 Wei) to enter
 - try and catch assertions
 - `web3.eth.getBalance()`
 
-## **Working with latest version of Solc**
+### Working with latest version of Solc
+
+- payable variables
+  - typecasting payable variables
+- 
+
 
 ---
 
@@ -365,6 +375,7 @@ Console logs MetaMask account currently available (only the connected account)
 
 ### 4_Kickstarter_Campaign
 
+#### Structure and ... of the contract
 VARIABLES
 ---------
 - manager => address [who is the manager in the real world application?]
@@ -381,6 +392,11 @@ FUNCTIONS
 - finalizeRequest => Called by the manager once the spending request has been approved
 
 
+**_Structure of the Contract_**
+- Voting Requirements
+  - Only 1 vote is allowed per approver
+- There shouldn't be a limit to the number of contributors, as Kickstarter campaigns may have hundreds or thousands of contributors
+- 
 
 ### FAQ
 
