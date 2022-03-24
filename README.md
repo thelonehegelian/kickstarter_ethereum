@@ -1,8 +1,21 @@
 # Solidity: a quick introduction
 
+## Ethereum Vitual Machine (EVM)
+
+- What is an Ethereum Virtual Machine?
+- What is Solidity? 
+- Why Solidity? 
+- What are OpCodes?
+- What is ByteCode?
+- How is Solidity Code compiled? 
+  - How and where does the EVM run the Solidity code?
+- How is Ethereum different from Bitcoin? 
+  - They both use OpCodes
+  - 
 ## Solidity Types:
 
 - string
+  - How are strings stored in EVM?
 - bool
 - int
 - uint (256)
@@ -18,8 +31,16 @@
   - note: the access function created for us to access arrays does not return the whole array but requires an index to return the value
   - there is a limitation on nested arrays due to the Web3 bridge between JavaScript and Solidity
   - strings a dynamic arrays, which means the above limitation would apply to array of strings e.g. ['hello', 'how', 'are', 'ya', '!']. This won't work
-- mapping
+- **_mapping**_
+  - Why mapping maybe preferrable to an array? 
+    - Avoids looping through dynamic array which cost a lot of gas (money).
+  - What is Constant Time Search compared to Linear Time Search?
+  -   
 - **_struct_**
+  - Why use structs?
+    - Similar to Classes in other languages
+    - Encapsulation 
+    - Code simplicity
 
 ```javascript
     /* 
