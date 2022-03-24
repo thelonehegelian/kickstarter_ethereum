@@ -29,12 +29,14 @@ contract Campaign {
         uint256 value; // in Wei
         address recipient;
         bool completed;
+        uint256 approvalCount;
+        mapping(address => uint256) approvals;
     }
 
     // array of Request struct, works like any other array
     Request[] public requests;
 
-    // modifier to restrict fucntion invocation
+    // modifier to restrict function invocation
     modifier restricted() {
         require(msg.sender == manager);
         _;
