@@ -16,8 +16,10 @@ contract Campaign {
     // manager is also the creator of the contract
     address payable public manager;
     // approvers array updated at approveRequest function call
+    address payable[] public approvers; // this should be an array of struct
     // !each address needs to be mapped to the amount of money each approver contributed
-    address payable[] public approvers;
+    // address => valueContributed
+    // mapping (address => uint) public approvers;
     address[] public contributors;
     // minimum Contribution in Wei
     uint256 public minimumContribution;
@@ -81,7 +83,10 @@ contract Campaign {
     }
 
     // Called by the contributors to approve a spending request
+    // only a contributor is allowed to call this function
     function approveRequest() public {}
 
-    function finalizeRequest() public {}
+    function finalizeRequest() public {
+        // are there enough aprovals for the request?
+    }
 }
