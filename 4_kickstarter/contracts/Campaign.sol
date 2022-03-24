@@ -5,17 +5,22 @@ pragma solidity >=0.7.0 <0.9.0;
 contract Campaign {
     // manager is also the creator of the contract
     address payable public manager;
+
     // approvers array updated at approveRequest function call
     mapping(address => bool) public approvers;
     // hmmm... maybe can also work with a struct for approver
     // so we can have more information about the approver and that struct can be a mapping of address => approversStruct
 
-    // !each address should  to be mapped to the amount of money each approver contributed
-    // address => valueContributed
-    // mapping (address => uint) public valueContributed;
-    //address [] public contributors;
+    /*  
+        !each address should  to be mapped to the amount of money each approver contributed
+        address => valueContributed
+        mapping (address => uint) public valueContributed;
+        address [] public contributors;
+    */
+
     // minimum Contribution in Wei
     uint256 public minimumContribution;
+
     // Request struct
     // used to create a request for approval by the contributors
     // A request can only be created by a manager
@@ -25,6 +30,7 @@ contract Campaign {
         address recipient;
         bool completed;
     }
+
     // array of Request struct, works like any other array
     Request[] public requests;
 
@@ -53,6 +59,7 @@ contract Campaign {
         // the amount sent at invocation should be larger that minimumContribution
         // TODO: ADD REQUIRE STATEMENT MODIFIER HERE
         require(msg.value > minimumContribution);
+
         // Add the contributors address to the approval mapping
         approvers[msg.sender] = true;
 
