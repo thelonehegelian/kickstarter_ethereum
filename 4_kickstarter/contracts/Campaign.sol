@@ -1,26 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
-/*
-
-VARIABLES
----------
-manager => address [who is the manager in the real world application?]
-minimumContribution => uint
-approvers => address array
-requests => Request []
-*/
-
 // Campaign => constructor
 contract Campaign {
     // manager is also the creator of the contract
     address payable public manager;
     // approvers array updated at approveRequest function call
-    address payable[] public approvers; // this should be an array of struct
-    // !each address needs to be mapped to the amount of money each approver contributed
+    mapping(address => bool) public approvers;
+    // hmmm... maybe can also work with a struct for approver
+    // so we can have more information about the approver and that struct can be a mapping of address => approversStruct
+
+    // !each address should  to be mapped to the amount of money each approver contributed
     // address => valueContributed
-    // mapping (address => uint) public approvers;
-    address[] public contributors;
+    // mapping (address => uint) public valueContributed;
+    //address [] public contributors;
     // minimum Contribution in Wei
     uint256 public minimumContribution;
     // Request struct
@@ -58,10 +51,13 @@ contract Campaign {
     // send minimum amount of eth required to participate in the Campaign
     function contribute() public payable {
         // the amount sent at invocation should be larger that minimumContribution
-        // ADD REQUIRE STATEMENT MODIFIER HERE
+        // TODO: ADD REQUIRE STATEMENT MODIFIER HERE
         require(msg.value > minimumContribution);
-        // push the function invocators address to the contributors array
-        approvers.push(payable(msg.sender));
+        // Add the contributors address to the approval mapping
+        approvers[msg.sender] = true;
+
+        // map the value contributed to the address of the contributor
+        // valueContributed [msg.sender] = msg.value
     }
 
     // Called by the manager to create a 'spending request' [how to determine a valid spending request in the real world?]
@@ -84,7 +80,9 @@ contract Campaign {
 
     // Called by the contributors to approve a spending request
     // only a contributor is allowed to call this function
-    function approveRequest() public {}
+    function approveRequest() public {
+        require(approvers[msg.sender]);
+    }
 
     function finalizeRequest() public {
         // are there enough aprovals for the request?
