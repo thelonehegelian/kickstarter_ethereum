@@ -28,13 +28,13 @@ contract Campaign {
         string description;
         uint256 value; // in Wei
         address recipient;
-        bool completed;
+        bool complete;
         uint256 approvalCount;
         mapping(address => uint256) approvals;
     }
-
-    // array of Request struct, works like any other array
-    Request[] public requests;
+    // mapping to store new request structs
+    uint256 numRequests;
+    mapping(uint256 => Request) requests;
 
     // modifier to restrict function invocation
     modifier restricted() {
@@ -76,15 +76,12 @@ contract Campaign {
         address _recipient
     ) public restricted {
         // create a request using the Request struct
-        Request memory newRequest = Request({
-            description: _description,
-            value: _value, // value is in Wei
-            recipient: _recipient,
-            completed: false // set initial value to false
-        });
-
-        // push the request in to the request array
-        requests.push(newRequest);
+        Request storage newRequest = requests[numRequests++]; // appends the struct to requests mapping
+        newRequest.description = _description;
+        newRequest.value = _value;
+        newRequest.recipient = _recipient;
+        newRequest.complete = false;
+        newRequest.approvalCount = 0;
     }
 
     // Called by the contributors to approve a spending request
