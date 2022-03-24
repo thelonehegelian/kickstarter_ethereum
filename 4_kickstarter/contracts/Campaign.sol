@@ -30,7 +30,7 @@ contract Campaign {
         address recipient;
         bool complete;
         uint256 approvalCount;
-        mapping(address => uint256) approvals;
+        mapping(address => bool) approvals;
     }
     // mapping to store new request structs
     uint256 numRequests;
@@ -86,8 +86,23 @@ contract Campaign {
 
     // Called by the contributors to approve a spending request
     // only a contributor is allowed to call this function
-    function approveRequest() public {
+    // parameters: key of the request mapping
+    function approveRequest(uint256 _index) public {
+        // this will minimize the operations where requests[_index] is required
+        // storage keyword used to access the requests in the storage [??]
+        Request storage request = requests[_index];
+        // check if the invocator of the function is an approver
         require(approvers[msg.sender]);
+
+        /*  
+            1. go to request mapping using the index
+            2. go to approvals mapping with key = address of the sender
+            3. check if approvals is False (default value)
+        */
+        require(!request.approvals[msg.sender]);
+        // set approvaal to true from sender address
+        request.approvals[msg.sender] = true;
+        request.approvalCount++;
     }
 
     function finalizeRequest() public {
