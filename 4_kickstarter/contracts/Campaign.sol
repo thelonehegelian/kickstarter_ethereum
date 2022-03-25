@@ -6,9 +6,13 @@ contract Campaign {
     // manager is also the creator of the contract
     address payable public manager;
 
-    // approvers array updated at approveRequest function call
-    mapping(address => bool) public approvers;
-    // hmmm... maybe can also work with a struct for approver
+    // approvers mapping updated when someone calls the 'contribute' function
+
+    /*
+        TODO: this should be renamed to 'contributor' as that is more descriptive of the purpose. 
+        Because, this is a person who has 'contributed' to the campaign
+    */
+    mapping(address => bool) public approvers; // hmmm... maybe can also work with a struct for approver
     // so we can have more information about the approver and that struct can be a mapping of address => approversStruct
 
     /*  
@@ -34,7 +38,12 @@ contract Campaign {
     }
     // mapping to store new request structs
     uint256 numRequests;
-    mapping(uint256 => Request) requests;
+    /* this should probably be a descriptive mapping, 
+    realistically users aren't cant be expected to know the description of the request 
+    through an index. Unless, of course, that is provided to the user some other way 
+    which I suppose is entirely possible
+    */
+    mapping(uint256 => Request) public requests;
 
     // modifier to restrict function invocation
     modifier restricted() {
@@ -63,13 +72,14 @@ contract Campaign {
         require(msg.value > minimumContribution);
 
         // Add the contributors address to the approval mapping
-        approvers[msg.sender] = true;
+        approvers[msg.sender] = true; // is the address a contributor? true
 
         // map the value contributed to the address of the contributor
         // valueContributed [msg.sender] = msg.value
     }
 
-    // Called by the manager to create a 'spending request' [how to determine a valid spending request in the real world?]
+    // Only the manager is allowed to create a request
+    // 'restricted' modifier ensures that
     function createRequest(
         string calldata _description,
         uint256 _value,
@@ -84,14 +94,14 @@ contract Campaign {
         newRequest.approvalCount = 0;
     }
 
-    // Called by the contributors to approve a spending request
-    // only a contributor is allowed to call this function
-    // parameters: key of the request mapping
+    // Called by a contributor (approver) to approve a spending request
+    // only a contributor (approver) is allowed to call this function
+    // parameters: key from the 'request mapping'
     function approveRequest(uint256 _index) public {
         // this will minimize the operations where requests[_index] is required
         // storage keyword used to access the requests in the storage [??]
         Request storage request = requests[_index];
-        // check if the invocator of the function is an approver
+        // check if the caller of the function is a contributor (approver)
         require(approvers[msg.sender]);
 
         /*  
@@ -102,10 +112,12 @@ contract Campaign {
         require(!request.approvals[msg.sender]);
         // set approvaal to true from sender address
         request.approvals[msg.sender] = true;
+        // increment approvalCount
         request.approvalCount++;
     }
 
-    function finalizeRequest() public {
+    // parameter: Request index
+    function finalizeRequest(uint256 _requestIndex) public {
         // are there enough aprovals for the request?
     }
 }
