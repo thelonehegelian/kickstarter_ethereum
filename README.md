@@ -118,6 +118,7 @@ When to use memory and when to use calldata?
   - value: amount of ether (in wei) sent to the contract when the function was invoked (can be compared to the required value to accept or reject the function call with _require()_)
 
 - **require**
+  - Used to test conditions, returns a boolean `require(condition, errorMessage)`
 - **sha3()**
 - **keccak256()**
 - **block**
