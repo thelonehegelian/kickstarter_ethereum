@@ -407,13 +407,14 @@ Console logs MetaMask account currently available (only the connected account)
 
 ### 4_Kickstarter_Campaign
 
-#### Structure and ... of the contract
+#### Structure of the contract
 VARIABLES
 ---------
 - manager => address [who is the manager in the real world application?]
 - minimumContribution => uint
-- approvers => address array
-- requests => Request []
+- approvers => mapping
+- requests => is a mapping of Request struct 
+- 
 
 FUNCTIONS
 ---------
@@ -423,12 +424,11 @@ FUNCTIONS
 - approveRequest => Called by the contributors to approve a spending request 
 - finalizeRequest => Called by the manager once the spending request has been approved
 
+---
 
-**_Structure of the Contract_**
-- Voting Requirements
-  - Only 1 vote is allowed per approver
+- Only 1 vote is allowed per approver
 - There shouldn't be a limit to the number of contributors, as Kickstarter campaigns may have hundreds or thousands of contributors
-- 
+-  
 
 ### FAQ
 
@@ -709,3 +709,5 @@ FUNCTIONS
 4. What are denominations of ETH?
 
 5. How is money stored in an Ethereum smart contract (i.e. contract balance)?
+
+6. Where is the money transferred to a contract stored? Can we have different places within a single contract to store the  money? (probably different address...)
