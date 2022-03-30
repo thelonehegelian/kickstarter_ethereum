@@ -3,13 +3,13 @@ const solc = require("solc");
 const fs = require("fs");
 
 // get path of the contract
-let contractPath = path.resolve(__dirname, "contracts", "SimpleContract.sol");
+let contractPath = path.resolve(__dirname, "contracts", "Campaign.sol");
 
 // compilation using the latest version of solc
 let input = {
   language: "Solidity",
   sources: {
-    "SimpleContract.sol": {
+    "Campaign.sol": {
       content: fs.readFileSync(contractPath, "utf8"),
     },
   },
@@ -28,8 +28,8 @@ console.log(`Compiling contract...`);
 // save compiled code to output
 let output = JSON.parse(solc.compile(JSON.stringify(input)));
 // export abi and bytecode compiled contract
-const interface = output.contracts["SimpleContract.sol"].SimpleContract.abi;
-const bytecode = output.contracts["SimpleContract.sol"].SimpleContract.evm.bytecode.object;
+const interface = output.contracts["Campaign.sol"].SimpleContract.abi;
+const bytecode = output.contracts["Campaign.sol"].SimpleContract.evm.bytecode.object;
 
 module.exports = {
   interface,
@@ -38,4 +38,4 @@ module.exports = {
 
 console.log(`Contract compiled successfully`);
 
-// console.log(output.contracts['SimpleContract.sol'].SimpleContract.evm.bytecode.object)
+// console.log(output.contracts['Campaign.sol'].SimpleContract.evm.bytecode.object)
