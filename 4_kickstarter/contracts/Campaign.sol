@@ -1,6 +1,25 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
+// Campaign Factory contract
+contract CampaignFactory {
+    // array of addresses
+    address[] public deployedCampaigns;
+
+    // campaign creator
+    function createCampaign(uint256 _minimum) public {
+        // deploys a new campaign contract
+        // in such a case msg.sender is the address of the Factory contract/the contract that call another contract
+        address newCampaign = address(new Campaign(_minimum, msg.sender)); // adding msg.sender to the parameter fixes the Factory address problem
+        deployedCampaigns.push(newCampaign);
+    }
+
+    // get the array of all the deployed contracts
+    function getDeployedContracts() public view returns (address[] memory) {
+        return deployedCampaigns;
+    }
+}
+
 // Campaign => constructor
 contract Campaign {
     // manager is also the creator of the contract
@@ -48,10 +67,7 @@ contract Campaign {
     uint256 public approversCount;
     // modifier to restrict function invocation
     modifier restricted() {
-        require(
-            msg.sender == manager,
-            "Only the contract manager can call this function"
-        );
+        require(msg.sender == manager);
         _;
     }
 
@@ -61,11 +77,11 @@ contract Campaign {
      as soon  the constructor function is added with a required parameter 
      remix deploy button adds an Input field
      */
-    constructor(uint256 _minimum) {
+    constructor(uint256 _minimum, address _creator) {
         // this value is in Wei
         minimumContribution = _minimum;
         // set manager as the creator of the contract
-        manager = payable(msg.sender);
+        manager = payable(_creator);
     }
 
     //function to allow users to participate in the Campaign
@@ -73,10 +89,7 @@ contract Campaign {
     function contribute() public payable {
         // the amount sent at invocation should be larger that minimumContribution
         // TODO: ADD REQUIRE STATEMENT MODIFIER HERE
-        require(
-            msg.value > minimumContribution,
-            "Sent value is less than minimumContribution"
-        );
+        require(msg.value > minimumContribution);
 
         // Add the contributors address to the approval mapping
         approvers[msg.sender] = true; // is the address a contributor? true
@@ -110,20 +123,14 @@ contract Campaign {
         // storage keyword used to access the requests in the storage [??]
         Request storage request = requests[_index];
         // check if the caller of the function is a contributor (approver)
-        require(
-            approvers[msg.sender],
-            "The function can only be called a contributor to the campaign"
-        );
+        require(approvers[msg.sender]);
 
         /*  
             1. go to request mapping using the index
             2. go to approvals mapping with key = address of the sender
             3. check if approvals is False (default value)
         */
-        require(
-            !request.approvals[msg.sender],
-            "This approver has already approved the request once "
-        );
+        require(!request.approvals[msg.sender]);
         // set approvaal to true from sender address
         request.approvals[msg.sender] = true;
         // increment approvalCount
@@ -134,12 +141,9 @@ contract Campaign {
     function finalizeRequest(uint256 _requestIndex) public restricted {
         Request storage request = requests[_requestIndex];
         // are there enough approvals for the request?
-        require(
-            request.approvalCount > (approversCount / 2),
-            "Approval count or approvers count does not meet the requirement to finalize the request"
-        );
+        require(request.approvalCount > (approversCount / 2));
         // require that the the request is incomplete
-        require(!request.complete, "The request has already been completed");
+        require(!request.complete);
         // transfer the money to the recepient
         request.recipient.transfer(request.value);
         // mark the request as complete
