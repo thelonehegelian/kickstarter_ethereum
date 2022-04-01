@@ -2,7 +2,7 @@ const path = require("path");
 const solc = require("solc");
 const fs = require("fs");
 
-// get ath of the contract
+// get path of the contract
 let contractPath = path.resolve(__dirname, "contracts", "Lottery.sol");
 
 // compilation using the latest version of solc

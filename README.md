@@ -33,7 +33,7 @@
   - there is a limitation on nested arrays due to the Web3 bridge between JavaScript and Solidity
   - strings a dynamic arrays, which means the above limitation would apply to array of strings e.g. ['hello', 'how', 'are', 'ya', '!']. This won't work
 
-**_mapping**_
+**_mapping**_(https://hackernoon.com/how-to-create-a-mapping-in-solidity-u6p34k1)
   - Why mapping maybe preferrable to an array? 
     - Avoids looping through dynamic array which cost a lot of gas (money).
   - What is Constant Time Search compared to Linear Time Search?
@@ -104,7 +104,7 @@ When to use memory and when to use calldata?
     function Lotto() public {}
   }
   ```
-- _What does a constructor function do?_
+- [_What does a constructor function do?_] (https://jeancvllr.medium.com/solidity-tutorial-all-about-constructors-46a10610336)
 
 
 
@@ -185,6 +185,35 @@ _"All transactions on the Ethereum blockchain are deterministic state transition
 - `web3.utils.toWei()`
 
 ---
+
+# Solc 
+---
+
+Compiling smart contracts: 
+  https://levelup.gitconnected.com/compiling-ethereum-smart-contracts-locally-0-5-2-0-5-x-ebfea0aed3a9
+  
+  ```javascript
+  const solc = require('solc');
+
+  let input = {
+    language: 'Solidity',
+    sources: {
+        'hello.sol': {
+            content: 'contract hello { function f() public { } }'
+        }
+    },
+    settings: {
+        outputSelection: {
+            '*': {
+                '*': ['*']
+            }
+        }
+    }
+  };
+
+  let output = JSON.parse(solc.compile(JSON.stringify(input)));
+  console.log(output);
+  ```
 
 # 0_boilerPlate
 
