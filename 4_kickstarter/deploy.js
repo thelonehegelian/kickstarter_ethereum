@@ -21,7 +21,7 @@ const web3 = new Web3(provider);
 // web3 functions are asynchronous so they need to be executed with an await statement
 // await statement can only be used within an async function hence...
 // hmmm... apparently there are also synchronous versions: https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-methods
-// also .then can also be used here to resolve promises
+// also .then can be used here to resolve promises too
 const deploy = async () => {
   // get all the accounts from the metamask mnemonic
   // one of the accounts would be used to send the transaction for contract deployment
@@ -43,7 +43,7 @@ const deploy = async () => {
     address: result.options.address,
   });
   fs.writeFileSync("contract.json", contract);
-  
+
   // console log contracts ABI
   // console.log(interface);
   // console logs the ethereum address of the deployed contract
