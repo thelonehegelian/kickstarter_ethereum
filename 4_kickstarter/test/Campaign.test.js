@@ -34,18 +34,15 @@ beforeEach(async () => {
       // create campaign using the factory contract  
       // createCampaign function expects a value
       await factory.methods.createCampaign('100').send({
-          from: accounts[0], gas: "1000000", // accounts[0] should also be the contract manager
+          from: accounts[1], gas: "1000000", // accounts[1] should also be the contract manager
       })
 
       // get the address of the deployed campaign contract above
      let addresses = await factory.methods.getDeployedContracts().call()
      campaignAddress = addresses[0]
-      console.log(campaignAddress)
+      // console.log(campaignAddress)
      // create the newly created campaign contract from the contract address
      campaign = await new web3.eth.Contract(compiledCampaignContract.abi, campaignAddress)
-      console.log(campaign.methods)
-      console.log(factory.methods)
-
   });
 
 // test to validate contract deployment
@@ -56,11 +53,15 @@ describe("Contracts", () => {
       assert.ok(factory.options.address)
     });
 
-    it("sets the creator of the campaign as manager"), async () => {      
-      // get the address of the deployed contract. This is already done in on line 42 
-      // call the manager function on the contract. The campaign contract is created on line 45 that can be used to call methods on the campaign contract
-      const managerAddress = await campaign.methods.manager().call()
+
+      
       // get the address of the person who deployed the campaign contract. See line 36, the contract was deployed using accounts[0]
-      assert.equal(accounts[0], managerAddress)
-    }
+
+      it("sets campaign creator as te manager of the contract", async () => {
+        // get the address of the deployed contract. This is already done in on line 42 
+        // call the manager function on the contract. The campaign contract is created on line 45 that can be used to call methods on the campaign contract
+        let managerAddress = await campaign.methods.manager().call()
+        
+        assert.equal(managerAddress, accounts[1])
+      })
 })
