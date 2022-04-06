@@ -57,11 +57,34 @@ describe("Contracts", () => {
       
       // get the address of the person who deployed the campaign contract. See line 36, the contract was deployed using accounts[0]
 
-      it("sets campaign creator as te manager of the contract", async () => {
+      it("sets campaign creator as the manager of the contract", async () => {
         // get the address of the deployed contract. This is already done in on line 42 
         // call the manager function on the contract. The campaign contract is created on line 45 that can be used to call methods on the campaign contract
         let managerAddress = await campaign.methods.manager().call()
-        
         assert.equal(managerAddress, accounts[1])
+      });
+
+      it("allows people to contribute to the campaign and adds them as approvers/contributors", async () => {
+
+        // value sent to the campaign contract
+        let valueContributed = '1000000'
+        // this should update the approvers mapping
+        let txnReceipt =  await campaign.methods.contribute().send({
+          from: accounts[2], gas: "1000000", value: valueContributed
+        })
+
+        // this should return true
+        let isContributor = await campaign.methods.approvers(accounts[2]).call()
+        assert(isContributor)
+        
+
+        /* This is one way to do it  
+        // get campaign balance from the address to which contribution was sent to
+        let campaignBalance = await web3.eth.getBalance(txnReceipt.to)
+        // campaignBalance and valueContributed should be equal 
+        assert.equal(campaignBalance, valueContributed) 
+        */
+      
       })
+
 })
