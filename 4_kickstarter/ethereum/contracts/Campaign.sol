@@ -3,7 +3,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 // Campaign Factory contract
 contract CampaignFactory {
-    // array of addresses
+    // array of contract addresses
     address[] public deployedCampaigns;
 
     // campaign creator
@@ -14,7 +14,8 @@ contract CampaignFactory {
         deployedCampaigns.push(newCampaign);
     }
 
-    // get the array of all the deployed contracts
+    // get the array of all the deployed contracts, only contract addresses are returned
+    //TODO: change name to getDeployedCampaigns
     function getDeployedContracts() public view returns (address[] memory) {
         return deployedCampaigns;
     }
@@ -93,7 +94,7 @@ contract Campaign {
 
         // Add the contributors address to the approval mapping
         approvers[msg.sender] = true; // is the address a contributor? true
-        // update number of approvers whoo have contributed to the campaign
+        // update number of approvers who have contributed to the campaign
         approversCount++;
         // map the value contributed to the address of the contributor
         // valueContributed [msg.sender] = msg.value
