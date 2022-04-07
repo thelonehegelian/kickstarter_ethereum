@@ -9,6 +9,7 @@ const web3 = new Web3(ganache.provider());
 // JSON.parse won't be needed as parsed it during the compilation process in compile.js
 const compiledFactoryContract = require("../ethereum/build/CampaignFactory.json");
 const compiledCampaignContract = require("../ethereum/build/Campaign.json");
+const { request } = require("http");
 
 // variables
 let accounts;
@@ -112,5 +113,37 @@ describe("Contracts", () => {
     let requests = await campaign.methods.requests(0).call();
     assert.equal(requests.description, "Buy cameras");
     assert.equal(requests.recipient, accounts[2]);
+  });
+
+  it("allows manager to finalize a request", async () => {
+    // make a contribution to a campaign from accounts[5]
+    await campaign.methods.contribute().send({
+      from: accounts[5],
+      gas: "1000000",
+      value: web3.utils.toWei("10", "ether"),
+    });
+
+    // create a request from manager: accounts[1]
+    await campaign.methods
+      .createRequest("Buy cameras", "100", accounts[2])
+      .send({
+        from: accounts[1], // contract manager
+        gas: "1000000",
+      });
+
+    // approve a request from a contributor: accounts[5]
+    // this will add the request to the requests mapping at index 0
+    await campaign.methods.approveRequest(0).send({
+      from: accounts[5],
+      gas: "1000000",
+    });
+    // finalize the request at index 0 from accounts[1]
+    await campaign.methods.finalizeRequest(0).send({
+      from: accounts[1],
+      gas: "1000000",
+    });
+    // get the request at index 0
+    let requests = await campaign.methods.requests(0).call();
+    assert(requests.complete); // should return true
   });
 });
