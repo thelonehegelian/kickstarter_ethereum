@@ -82,9 +82,22 @@ describe("Contracts", () => {
         // get campaign balance from the address to which contribution was sent to
         let campaignBalance = await web3.eth.getBalance(txnReceipt.to)
         // campaignBalance and valueContributed should be equal 
-        assert.equal(campaignBalance, valueContributed) 
-        
-      
+        assert.equal(campaignBalance, valueContributed)       
       })
 
+      it ("requires a minimum contribution", async ()=> {
+        
+        // minimum contribution should be the one set at contract deployment which in this instance is 100
+        try {
+           // the test should fail and assertion should be false, which will send the code to the catch block
+            await campaign.methods.contribute().send({
+              from: accounts[2], gas: '1000000', value: '10'
+            })
+            assert(false)
+        } catch (err) {
+          assert(err)
+
+        }
+
+      } )
 })
