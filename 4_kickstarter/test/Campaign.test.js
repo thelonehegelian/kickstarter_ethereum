@@ -78,12 +78,12 @@ describe("Contracts", () => {
         assert(isContributor)
         
 
-        /* This is one way to do it  
+        // This test is not necessary. It test if the money was added to the campaign
         // get campaign balance from the address to which contribution was sent to
         let campaignBalance = await web3.eth.getBalance(txnReceipt.to)
         // campaignBalance and valueContributed should be equal 
         assert.equal(campaignBalance, valueContributed) 
-        */
+        
       
       })
 
