@@ -94,7 +94,7 @@ contract Campaign {
 
         // Add the contributors address to the approval mapping
         approvers[msg.sender] = true; // is the address a contributor? true
-        // update number of approvers whoo have contributed to the campaign
+        // update number of approvers who have contributed to the campaign
         approversCount++;
         // map the value contributed to the address of the contributor
         // valueContributed [msg.sender] = msg.value
