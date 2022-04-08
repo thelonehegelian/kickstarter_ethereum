@@ -145,5 +145,11 @@ describe("Contracts", () => {
     // get the request at index 0
     let requests = await campaign.methods.requests(0).call();
     assert(requests.complete); // should return true
+    // check if the money was sent.
+    // The balance should be more than 0 eth and a bit less than 10 eth (accounting for gas costs)
+    let balance = await web3.eth.getBalance(requests.recipient);
+    balance = parseFloat(web3.utils.toWei(balance, "ether"));
+    // this is enough for now
+    assert(balance > 9.9);
   });
 });
