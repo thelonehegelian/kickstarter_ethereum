@@ -261,6 +261,7 @@ Console logs MetaMask account currently available (only the connected account)
 ### 4_Kickstarter_Campaign
 
 #### Structure of the contract
+
 VARIABLES
 ---------
 - manager => address [who is the manager in the real world application?]
@@ -282,6 +283,18 @@ FUNCTIONS
 - Only 1 vote is allowed per approver
 - There shouldn't be a limit to the number of contributors, as Kickstarter campaigns may have hundreds or thousands of contributors
 -  
+
+
+#### Front-end
+
+- install packages `npm install next react react-dom`
+- Add pages folder to root directory. Next routes go in these pages
+- add `"dev": "next dev"` to package.json scripts object
+- 
+
+
+
+
 
 ### FAQ
 
