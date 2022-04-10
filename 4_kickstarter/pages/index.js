@@ -1,7 +1,7 @@
 import React from 'react';
 import factory from '../ethereum/factory'
 
-export class CampaignIndex extends Component {
+ class CampaignIndex extends React.Component {
     async componentDidMount() {
     const campaigns = await factory.methods.getDeployedContracts().call()
 
@@ -12,3 +12,5 @@ export class CampaignIndex extends Component {
         return <div>Campaings Index</div>
     }
 }
+
+export default CampaignIndex

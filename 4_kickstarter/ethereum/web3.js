@@ -13,7 +13,7 @@ if  (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
 else {
     // we are running the code on nextjs server or the user does not have metamask etc
     // set the rinkeby endpoint from infura
-    provider = new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/75ae527684f249b583774781214dcbcc") 
+    const provider = new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/75ae527684f249b583774781214dcbcc") 
     web3 = new Web3(provider)
 }
 
