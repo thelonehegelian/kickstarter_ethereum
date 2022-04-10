@@ -78,7 +78,7 @@ contract Campaign {
      as soon  the constructor function is added with a required parameter 
      remix deploy button adds an Input field
      */
-    constructor(uint256 _minimum, address _creator) {
+    constructor(uint256 _minimum, address _creator) { // TODO: maybe campaigns should have a name too
         // this value is in Wei
         minimumContribution = _minimum;
         // set manager as the creator of the contract
