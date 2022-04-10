@@ -293,8 +293,24 @@ FUNCTIONS
 - 
 
 
+```javascript
+      // TODO: explain this
+      import Web3 from "web3";
+      import web3 from './web3'
+      import CampaignFactory from '.build/CampaignFactory.json'
 
+      window.ethereum.request({method: "eth_requestAccounts"})
 
+      const web3 = new Web3(window.ethereum)
+      
+      // deploy contract instance using the abi and contract address
+      const campaignFactoryInstance = new web3.eth.Contract(JSON.parse(CampaignFactory.abi), "0x06410DAFB24e77d3Dd82947d59c0b70f2018c1af")
+
+      export default campaignFactoryInstance
+```
+
+TODO: What is the "window not defined" and why does it occur in NextJs and not in create-react-app (CRA)?
+TODO: Why NextJs is better in general and why is it a good choice for an ethereum app?
 
 ### FAQ
 
