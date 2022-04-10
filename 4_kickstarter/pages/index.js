@@ -1,5 +1,14 @@
 import React from 'react';
+import factory from '../ethereum/factory'
 
-export default () => {
-    return <h1>This is Home Page</h1>
+export class CampaignIndex extends Component {
+    async componentDidMount() {
+    const campaigns = await factory.methods.getDeployedContracts().call()
+
+        console.log(campaigns)
+    }
+
+    render() {
+        return <div>Campaings Index</div>
+    }
 }
