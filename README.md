@@ -311,6 +311,9 @@ FUNCTIONS
 
 TODO: What is the "window not defined" and why does it occur in NextJs and not in create-react-app (CRA)?
 TODO: Why NextJs is better in general and why is it a good choice for an ethereum app?
+TODO: Why is fetching data in componentDidMount is not advisable in NextJs?
+TODO: What is getInitiaProps?
+TODO: How to prevent JavaScript from rendering on the page?
 
 ### FAQ
 
