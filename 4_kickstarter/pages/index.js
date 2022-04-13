@@ -6,7 +6,10 @@ import DatePicker from '../components/DatePicker'
 
 
 export default function Home() {
-  return <div>Hello Old Friend</div>
+  return <div>Hello Old Friend
+
+    <div><DatePicker/></div>
+  </div>
 }
 /**
  
