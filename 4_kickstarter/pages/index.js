@@ -1,20 +1,12 @@
+import { Form, Select, InputNumber, Switch, Slider, Button } from 'antd'
 
-import React from "react";
-import { Button, Space, DatePicker, Card } from 'antd';
-import { CiCircleFilled } from '@ant-design/icons';
+// Custom DatePicker that uses Day.js instead of Moment.js
+import DatePicker from '../components/DatePicker'
+
+
 
 export default function Home() {
-  const onChange = () => {};
-  return (
-    <div style={{ padding: 100 }}>
-      <Space direction="vertical">
-        <Button type="primary">Primary Button</Button>
-        <Button type="ghost">Ghost Button</Button>
-        <DatePicker onChange={onChange} />
-        <CiCircleFilled />
-      </Space>
-    </div>
-  );
+  return <div>Hello Old Friend</div>
 }
 /**
  
