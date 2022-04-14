@@ -20,7 +20,7 @@ class CampaignIndex extends React.Component {
       return {
         header: address,
         name: campaignName,
-        link: <a>View Campaign</a>,
+        description: <a>View Campaign</a>,
 
       };
     });
