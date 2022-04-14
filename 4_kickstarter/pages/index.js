@@ -1,6 +1,11 @@
 import React from "react";
 import factory from "../ethereum/factory";
 import BasicCard from "../components/BasicCard";
+import CreateCampaignButton from "../components/CreateCampaignButton";
+// import Layout
+import { Layout } from "antd";
+
+const { Header, Footer, Sider, Content } = Layout;
 
 let campaignName = "Little Bittle Campaign";
 class CampaignIndex extends React.Component {
@@ -9,28 +14,34 @@ class CampaignIndex extends React.Component {
   static async getInitialProps() {
     // get the deployd campaign array from the factory contract
     const campaigns = await factory.methods.getDeployedContracts().call();
-    console.log(campaigns);
     //  return the data
     return { campaigns }; // should be returned using curly braces to give this.props[0] campaign name
   }
 
   renderCampaigns() {
-    console.log(this.props)
     let items = this.props.campaigns.map((address) => {
       return {
         header: address,
         name: campaignName,
         description: <a>View Campaign</a>,
-
       };
     });
-    return <BasicCard items = {items}/>
+    return <BasicCard items={items} />;
   }
 
   render() {
     return (
-      <div>{this.renderCampaigns()}
-      </div>
+      <Layout>
+        <Header>NavBar</Header>
+        <Content>
+          {" "}
+          <div>{this.renderCampaigns()}</div>
+          <div>
+            <CreateCampaignButton />
+          </div>
+        </Content>
+        <Footer>Footer</Footer>
+      </Layout>
     );
   }
 }
