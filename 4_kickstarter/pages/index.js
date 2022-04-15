@@ -37,7 +37,6 @@ class CampaignIndex extends React.Component {
         <Content>
           {" "}
           <div>{this.renderCampaigns()}</div>
-          {/* Link tag not working here */}
           <CreateCampaignButton />
         </Content>
       </Layout>
