@@ -21,8 +21,9 @@ export default class CampaignNew extends React.Component {
       // gas is automatically calculated by metamask
     });
 
-
     // TODO: once the campaign is created user should be updated about the new contract
+    // TODO: error handling and message display for user
+    // TODO: work in progress button spinner to indicate to user that computation is happening behind the scenes 
   };
 
   render() {

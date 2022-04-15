@@ -24,7 +24,7 @@ class CampaignIndex extends React.Component {
       return {
         header: address,
         name: campaignName,
-        description: <a>View Campaign</a>,
+        description: <a>View Campaign</a>, // dynamic routing
       };
     });
 
