@@ -40,7 +40,6 @@ class CampaignIndex extends React.Component {
             <CreateCampaignButton />
           </div>
         </Content>
-        <Footer>Footer</Footer>
       </Layout>
     );
   }

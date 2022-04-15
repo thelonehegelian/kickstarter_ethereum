@@ -6,7 +6,6 @@ export default function CreateCampaignButton() {
       <Button type="primary" size='large'>
         Create Campaign
       </Button>
-      ;
     </>
   );
 }
