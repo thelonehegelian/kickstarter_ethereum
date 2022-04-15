@@ -3,15 +3,24 @@ import { Card } from "antd";
 
 
 export default function BasicCard(props) {
-  return (
-    <>
-      <Card
-        title={props.items[0].name} // campaign name
-        extra={props.items[0].description} // link to campaign
+
+
+  let cardsComponent = props.items.map(campaign => {
+    return    (
+        <Card
+        key = {campaign.description} // ethereum addresses are unique and these one's are public anyway so using them as key would be okay 
+        title={campaign.name} // campaign name
+        extra={campaign.description} // link to campaign
         style={{ width: 500 }}
       >
-        <p>{props.items[0].header}</p> {/* Campaign address */}
+        <p>{campaign.header}</p> {/* Campaign address */}
       </Card>
+  )
+  })
+
+  return (
+    <>
+      {cardsComponent}
     </>
   );
 }

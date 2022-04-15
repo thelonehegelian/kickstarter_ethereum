@@ -27,6 +27,7 @@ class CampaignIndex extends React.Component {
         description: <a>View Campaign</a>,
       };
     });
+
     return <BasicCard items={items} />;
   }
 

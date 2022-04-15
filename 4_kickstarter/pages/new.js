@@ -12,17 +12,20 @@ export default class CampaignNew extends React.Component {
   };
 
   handleSubmit = async (event) => {
-    //   get accounts from metamask
-    const accounts = web3.eth.getAccounts();
-    event.preventDefault();
+
+    // get all the accounts from metamask
+    const accounts = await web3.eth.getAccounts();
+    // send the transaction to the network and deploy a campaign 
     await factory.methods.createCampaign(this.state.minimumContribution).send({
       from: accounts[0], // sender
       // gas is automatically calculated by metamask
     });
+
+
+    // TODO: once the campaign is created user should be updated about the new contract
   };
 
   render() {
-    console.log(this.state.minimumContribution);
     return (
       <>
         <Layout>
