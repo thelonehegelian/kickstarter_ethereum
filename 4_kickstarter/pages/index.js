@@ -2,6 +2,7 @@ import React from "react";
 import factory from "../ethereum/factory";
 import BasicCard from "../components/BasicCard";
 import CreateCampaignButton from "../components/CreateCampaignButton";
+
 // import Layout
 import { Layout } from "antd";
 
@@ -36,9 +37,8 @@ class CampaignIndex extends React.Component {
         <Content>
           {" "}
           <div>{this.renderCampaigns()}</div>
-          <div>
-            <CreateCampaignButton />
-          </div>
+          {/* Link tag not working here */}
+          <CreateCampaignButton />
         </Content>
       </Layout>
     );
