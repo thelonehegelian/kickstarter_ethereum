@@ -3,7 +3,9 @@ import { Form, Input, Button } from "antd";
 import { Layout } from "antd";
 import factory from "../ethereum/factory";
 import web3 from "../ethereum/web3";
-import Router from "next/router";
+// import router from router file
+import {Router} from '../routes'
+
 const { Header, Content } = Layout;
 
 export default class CampaignNew extends React.Component {
@@ -35,6 +37,7 @@ export default class CampaignNew extends React.Component {
     // TODO: error handling and message display for user
     // TODO: work in progress button spinner to indicate to user that computation is happening behind the scenes
   };
+
 
   render() {
     return (
@@ -89,6 +92,7 @@ export default class CampaignNew extends React.Component {
                 >
                   Create
                 </Button>
+
               </Form.Item>
             </Form>
           </Content>
