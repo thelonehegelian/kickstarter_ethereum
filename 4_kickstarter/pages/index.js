@@ -2,6 +2,7 @@ import React from "react";
 import factory from "../ethereum/factory";
 import BasicCard from "../components/BasicCard";
 import CreateCampaignButton from "../components/CreateCampaignButton";
+import Navbar from "../components/Navbar";
 
 // import Layout
 import { Layout } from "antd";
@@ -34,7 +35,7 @@ class CampaignIndex extends React.Component {
   render() {
     return (
       <Layout>
-        <Header>NavBar</Header>
+        <Navbar />
         <Content>
           {" "}
           <div>{this.renderCampaigns()}</div>
