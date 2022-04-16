@@ -3,6 +3,7 @@ import { Form, Input, Button } from "antd";
 import { Layout } from "antd";
 import factory from "../ethereum/factory";
 import web3 from "../ethereum/web3";
+import Router from "next/router";
 const { Header, Content } = Layout;
 
 export default class CampaignNew extends React.Component {
@@ -11,7 +12,7 @@ export default class CampaignNew extends React.Component {
     errorMessage: "",
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async () => {
     try {
       // get all the accounts from metamask
       const accounts = await web3.eth.getAccounts();
@@ -22,6 +23,10 @@ export default class CampaignNew extends React.Component {
           from: accounts[0], // sender
           // gas is automatically calculated by metamask
         });
+
+        // send the user back to home page
+        Router.pushRoute('/')
+
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
