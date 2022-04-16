@@ -1,10 +1,12 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
-import { Layout } from "antd";
 import factory from "../ethereum/factory";
 import web3 from "../ethereum/web3";
 // import router from router file
-import {Router} from '../routes'
+import { Router } from "../routes";
+
+// antd imports
+import { DownloadOutlined, PoweroffOutlined } from "@ant-design/icons";
+import { Layout, Form, Input, Button } from "antd";
 
 const { Header, Content } = Layout;
 
@@ -12,9 +14,11 @@ export default class CampaignNew extends React.Component {
   state = {
     minimumContribution: "",
     errorMessage: "",
+    isLoading: false,
   };
 
   handleSubmit = async () => {
+    this.setState({isLoading: true});
     try {
       // get all the accounts from metamask
       const accounts = await web3.eth.getAccounts();
@@ -25,10 +29,10 @@ export default class CampaignNew extends React.Component {
           from: accounts[0], // sender
           // gas is automatically calculated by metamask
         });
-
-        // send the user back to home page
-        Router.pushRoute('/')
-
+        // set loader icon back to false
+        this.setState({isLoading: false})
+      // send the user back to home page
+      Router.pushRoute("/");
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -37,7 +41,6 @@ export default class CampaignNew extends React.Component {
     // TODO: error handling and message display for user
     // TODO: work in progress button spinner to indicate to user that computation is happening behind the scenes
   };
-
 
   render() {
     return (
@@ -85,14 +88,17 @@ export default class CampaignNew extends React.Component {
                 }}
               >
                 {/* Using onClick instead of form onSubmit, because onSubmit is not working */}
-                <Button
-                  onClick={this.handleSubmit}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Create
-                </Button>
 
+                {this.state.isLoading ? 
+                  <Button type="primary" icon={<PoweroffOutlined />} loading />
+                : <Button
+                onClick={this.handleSubmit}
+                type="primary"
+                htmlType="submit"
+              >
+                Create
+              </Button>
+                }
               </Form.Item>
             </Form>
           </Content>
@@ -101,3 +107,9 @@ export default class CampaignNew extends React.Component {
     );
   }
 }
+
+/**
+ * 
+ * 
+        
+ */
