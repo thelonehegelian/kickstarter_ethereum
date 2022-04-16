@@ -3,27 +3,32 @@ import { Form, Input, Button } from "antd";
 import { Layout } from "antd";
 import factory from "../ethereum/factory";
 import web3 from "../ethereum/web3";
-
 const { Header, Content } = Layout;
 
 export default class CampaignNew extends React.Component {
   state = {
     minimumContribution: "",
+    errorMessage: "",
   };
 
   handleSubmit = async (event) => {
-
-    // get all the accounts from metamask
-    const accounts = await web3.eth.getAccounts();
-    // send the transaction to the network and deploy a campaign 
-    await factory.methods.createCampaign(this.state.minimumContribution).send({
-      from: accounts[0], // sender
-      // gas is automatically calculated by metamask
-    });
+    try {
+      // get all the accounts from metamask
+      const accounts = await web3.eth.getAccounts();
+      // send the transaction to the network and deploy a campaign
+      await factory.methods
+        .createCampaign(this.state.minimumContribution)
+        .send({
+          from: accounts[0], // sender
+          // gas is automatically calculated by metamask
+        });
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
 
     // TODO: once the campaign is created user should be updated about the new contract
     // TODO: error handling and message display for user
-    // TODO: work in progress button spinner to indicate to user that computation is happening behind the scenes 
+    // TODO: work in progress button spinner to indicate to user that computation is happening behind the scenes
   };
 
   render() {
