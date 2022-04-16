@@ -1,11 +1,15 @@
 import styles from "./Navbar.module.css";
+import Link from "next/link";
+import { Button } from "antd";
 
 export default function Navbar() {
   return (
-    <div className="navbar navbar-container">
-      <a>Home</a>
-      <a>Campaigns</a>
-      <a>About</a>
-    </div>
+    <nav className={styles.navbar_container}>
+      <ul>
+        <Link href="/">
+          <Button ghost>CrowdCoin</Button>
+        </Link>
+      </ul>
+    </nav>
   );
 }

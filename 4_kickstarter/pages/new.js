@@ -3,6 +3,7 @@ import factory from "../ethereum/factory";
 import web3 from "../ethereum/web3";
 // import router from router file
 import { Router } from "../routes";
+import Navbar from "../components/navbar";
 
 // antd imports
 import { DownloadOutlined, PoweroffOutlined } from "@ant-design/icons";
@@ -18,7 +19,7 @@ export default class CampaignNew extends React.Component {
   };
 
   handleSubmit = async () => {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     try {
       // get all the accounts from metamask
       const accounts = await web3.eth.getAccounts();
@@ -29,8 +30,8 @@ export default class CampaignNew extends React.Component {
           from: accounts[0], // sender
           // gas is automatically calculated by metamask
         });
-        // set loader icon back to false
-        this.setState({isLoading: false})
+      // set loader icon back to false
+      this.setState({ isLoading: false });
       // send the user back to home page
       Router.pushRoute("/");
     } catch (err) {
@@ -46,7 +47,7 @@ export default class CampaignNew extends React.Component {
     return (
       <>
         <Layout>
-          <Header>Navbar</Header>
+          <Navbar />
           <Content>
             <h1>Create a Campaign</h1>
             <Form
@@ -89,16 +90,17 @@ export default class CampaignNew extends React.Component {
               >
                 {/* Using onClick instead of form onSubmit, because onSubmit is not working */}
 
-                {this.state.isLoading ? 
+                {this.state.isLoading ? (
                   <Button type="primary" icon={<PoweroffOutlined />} loading />
-                : <Button
-                onClick={this.handleSubmit}
-                type="primary"
-                htmlType="submit"
-              >
-                Create
-              </Button>
-                }
+                ) : (
+                  <Button
+                    onClick={this.handleSubmit}
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Create
+                  </Button>
+                )}
               </Form.Item>
             </Form>
           </Content>

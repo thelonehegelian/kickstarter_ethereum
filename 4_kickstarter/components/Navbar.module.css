@@ -1,3 +1,8 @@
-.navbar navbar-container {
+.navbar_container {
+    display: flex;
+    height: 100px;
+    background-color:#66C3FF;
+    align-items: center;
+    align-content: space-around;
 
 }
