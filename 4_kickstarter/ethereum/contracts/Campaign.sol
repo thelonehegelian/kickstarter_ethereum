@@ -19,6 +19,10 @@ contract CampaignFactory {
     function getDeployedContracts() public view returns (address[] memory) {
         return deployedCampaigns;
     }
+
+    function getDeployedCampaigns() public view returns (address[] memory) {
+        return deployedCampaigns;
+    }
 }
 
 // Campaign => constructor
