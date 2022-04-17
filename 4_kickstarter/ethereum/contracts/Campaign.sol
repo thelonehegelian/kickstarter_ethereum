@@ -78,7 +78,8 @@ contract Campaign {
      as soon  the constructor function is added with a required parameter 
      remix deploy button adds an Input field
      */
-    constructor(uint256 _minimum, address _creator) { // TODO: maybe campaigns should have a name too
+    constructor(uint256 _minimum, address _creator) {
+        // TODO: maybe campaigns should have a name too
         // this value is in Wei
         minimumContribution = _minimum;
         // set manager as the creator of the contract
@@ -149,5 +150,25 @@ contract Campaign {
         request.recipient.transfer(request.value);
         // mark the request as complete
         request.complete = true;
+    }
+
+    function getSummary()
+        public
+        view
+        returns (
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            address
+        )
+    {
+        return (
+            minimumContribution,
+            address(this).balance,
+            numRequests,
+            approversCount,
+            manager
+        );
     }
 }
