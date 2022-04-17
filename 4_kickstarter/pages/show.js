@@ -1,6 +1,7 @@
 import React from "react";
 import campaign from "../ethereum/campaign";
 import { Card, Col, Row } from "antd";
+import web3 from "../ethereum/web3";
 /**
  * 1. get the address from the props
  * 2. get the campaign from ethereum using the address
@@ -42,7 +43,7 @@ export default class ShowCampaign extends React.Component {
             </Col>
             <Col span={6}>
               <Card title="Contract Balance" bordered={false}>
-                {this.props.contractBalance}
+                {web3.utils.fromWei(this.props.contractBalance, "ether")}
               </Card>
             </Col>
             <Col span={6}>
