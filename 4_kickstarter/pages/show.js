@@ -16,11 +16,46 @@ export default class ShowCampaign extends React.Component {
     const contractAddress = props.query.address;
     const campaignInstance = campaign(contractAddress);
     const campaignSummary = await campaignInstance.methods.getSummary().call();
-
-    return { campaignSummary };
+    console.log(props.query);
+    // summary object returns an object, the keys are 0,1,2...
+    // create summary object using named keys
+    return {
+      minimumContribution: campaignSummary[0],
+      contractBalance: campaignSummary[1],
+      numRequests: campaignSummary[2],
+      approversCount: campaignSummary[3],
+      managerAddress: campaignSummary[4],
+    }; // returns an object
   }
 
   render() {
-    return <h1>Show Campaign {this.props.contractAddress}</h1>;
+    return (
+      <div>
+        <h1>Show Campaign </h1>
+
+        <p>
+          Minimum Contribution:
+          {this.props.minimumContribution}
+        </p>
+
+        <p>
+          Contract Balance:
+          {this.props.contractBalance}
+        </p>
+        <p>
+          Number of Requests:
+          {this.props.numRequests}
+        </p>
+        <p>
+          Approvers Count:
+          {this.props.approversCount}
+        </p>
+
+        <p>
+          Contract Manager:
+          {this.props.managerAddress}
+        </p>
+      </div>
+    );
   }
 }
