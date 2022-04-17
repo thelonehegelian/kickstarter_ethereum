@@ -1,5 +1,6 @@
 import React from "react";
 import campaign from "../ethereum/campaign";
+import { Card, Col, Row } from "antd";
 /**
  * 1. get the address from the props
  * 2. get the campaign from ethereum using the address
@@ -30,32 +31,38 @@ export default class ShowCampaign extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Show Campaign </h1>
-
-        <p>
-          Minimum Contribution:
-          {this.props.minimumContribution}
-        </p>
-
-        <p>
-          Contract Balance:
-          {this.props.contractBalance}
-        </p>
-        <p>
-          Number of Requests:
-          {this.props.numRequests}
-        </p>
-        <p>
-          Approvers Count:
-          {this.props.approversCount}
-        </p>
-
-        <p>
-          Contract Manager:
-          {this.props.managerAddress}
-        </p>
-      </div>
+      <>
+        <h1>Show Campaign</h1>
+        <div className="site-card-wrapper">
+          <Row gutter={16}>
+            <Col span={6}>
+              <Card title="Minimum Contribution" bordered={false}>
+                {this.props.minimumContribution}
+              </Card>
+            </Col>
+            <Col span={6}>
+              <Card title="Contract Balance" bordered={false}>
+                {this.props.contractBalance}
+              </Card>
+            </Col>
+            <Col span={6}>
+              <Card title="Number of Requests" bordered={false}>
+                {this.props.numRequests}
+              </Card>
+            </Col>
+            <Col span={6}>
+              <Card title="Approvers Count" bordered={false}>
+                {this.props.approversCount}
+              </Card>
+            </Col>
+            <Col span={6}>
+              <Card title="Contract Manager's Address" bordered={false}>
+                {this.props.managerAddress}
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      </>
     );
   }
 }
