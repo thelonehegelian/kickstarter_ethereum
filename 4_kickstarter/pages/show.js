@@ -2,6 +2,7 @@ import React from "react";
 import campaign from "../ethereum/campaign";
 import { Card, Col, Row } from "antd";
 import web3 from "../ethereum/web3";
+import ContributeForm from "../components/ContributeForm";
 /**
  * 1. get the address from the props
  * 2. get the campaign from ethereum using the address
@@ -62,6 +63,7 @@ export default class ShowCampaign extends React.Component {
               </Card>
             </Col>
           </Row>
+          <ContributeForm />
         </div>
       </>
     );
