@@ -29,7 +29,8 @@ export default class ContributeForm extends React.Component {
               },
             ]}
           >
-            <Input placeholder="Wei" value="" onChange="" />
+            {/* Convert input to Wei*/}
+            <Input placeholder="Ether" value="" onChange="" />
           </Form.Item>
         </Form>
       </>
