@@ -1,9 +1,18 @@
 import React from "react";
 // antd imports
 import { Layout, Form, Input, Button } from "antd";
+import campaign from "../ethereum/campaign";
 
 export default class ContributeForm extends React.Component {
+  state = {
+    contributionValue: "",
+  };
+
   render() {
+    handleSubmit = async () => {
+      // create campaign instance
+      const campaignInstance = campaign(this.props.campaignAddress);
+    };
     return (
       <>
         <Form
@@ -30,9 +39,16 @@ export default class ContributeForm extends React.Component {
             ]}
           >
             {/* Convert input to Wei*/}
-            <Input placeholder="Ether" value="" onChange="" />
+            <Input
+              placeholder="Ether"
+              value={this.state.contributionValue}
+              onChange={(event) => {
+                this.setState({ contributionValue: event.target.value });
+              }}
+            />
           </Form.Item>
         </Form>
+        <Button onClick={this.handleSubmit}>Contribute</Button>
       </>
     );
   }

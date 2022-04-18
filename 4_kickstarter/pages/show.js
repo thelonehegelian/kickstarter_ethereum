@@ -20,7 +20,6 @@ export default class ShowCampaign extends React.Component {
     const contractAddress = props.query.address;
     const campaignInstance = campaign(contractAddress);
     const campaignSummary = await campaignInstance.methods.getSummary().call();
-    console.log(props.query);
     // summary object returns an object, the keys are 0,1,2...
     // create summary object using named keys
     return {
@@ -29,6 +28,7 @@ export default class ShowCampaign extends React.Component {
       numRequests: campaignSummary[2],
       approversCount: campaignSummary[3],
       managerAddress: campaignSummary[4],
+      campaignAddress: contractAddress, // the address needs to be here as props are not accessible outside the getInitialProps function
     }; // returns an object
   }
 
@@ -67,7 +67,7 @@ export default class ShowCampaign extends React.Component {
         </div>
         <div>
           {/* TODO: Add styles */}
-          <ContributeForm />
+          <ContributeForm campaignAddress={this.props.campaignAddress} />
         </div>
       </>
     );
