@@ -1,6 +1,6 @@
 import React from "react";
 import campaign from "../ethereum/campaign";
-import { Card, Col, Row, Button } from "antd";
+import { Card, Col, Row } from "antd";
 import web3 from "../ethereum/web3";
 import ContributeForm from "../components/ContributeForm";
 
@@ -68,7 +68,6 @@ export default class ShowCampaign extends React.Component {
         <div>
           {/* TODO: Add styles */}
           <ContributeForm />
-          <Button>Contribute</Button>
         </div>
       </>
     );
