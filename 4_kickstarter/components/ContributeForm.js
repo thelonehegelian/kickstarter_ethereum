@@ -17,13 +17,15 @@ export default class ContributeForm extends React.Component {
     // create campaign instance
     const campaignInstance = campaign(this.props.campaignAddress);
     // convert contribution value to wei
+
     const contributionValue = web3.utils.toWei(
       this.state.contributionValue,
       "ether"
-    );
+    ); // contributionValue should be a little more than the expected value to account for gas
     // call contribute function on the campaign
-    await campaignInstance.methods.contribute(contributionValue).send({
+    await campaignInstance.methods.contribute().send({
       from: accounts[0], // gas is calculated automatically
+      value: contributionValue, // value sent to the contract
     });
 
     this.setState({ isLoading: false });
