@@ -29,6 +29,7 @@ export default class ContributeForm extends React.Component {
     });
 
     this.setState({ isLoading: false });
+    // TODO: the page needs to update the data straight after the function is called. At the moment the user has to referesh the page to update the data
   };
 
   render() {
