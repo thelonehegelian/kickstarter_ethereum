@@ -3,7 +3,7 @@ import factory from "../ethereum/factory";
 import BasicCard from "../components/BasicCard";
 import CreateCampaignButton from "../components/CreateCampaignButton";
 import Navbar from "../components/Navbar";
-import {Link} from '../routes'
+import { Link } from "../routes";
 
 // import Layout
 import { Layout } from "antd";
@@ -11,7 +11,7 @@ import { Layout } from "antd";
 const { Content } = Layout;
 
 let campaignName = "Little Bittle Campaign";
-class CampaignIndex extends React.Component {
+export default class CampaignIndex extends React.Component {
   // get data from the ethereum contract and set it as props for this component
   // the function should resolve to an object
   static async getInitialProps() {
@@ -26,7 +26,7 @@ class CampaignIndex extends React.Component {
       return {
         header: address,
         name: campaignName,
-        description: <Link route ={`/campaigns/${address}`}>View Campaign</Link>,  // view campaign link, dynamic routing
+        description: <Link route={`/campaigns/${address}`}>View Campaign</Link>, // view campaign link, dynamic routing
       };
     });
 
@@ -46,5 +46,3 @@ class CampaignIndex extends React.Component {
     );
   }
 }
-
-export default CampaignIndex;
