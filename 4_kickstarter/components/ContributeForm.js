@@ -12,21 +12,27 @@ export default class ContributeForm extends React.Component {
 
   handleSubmit = async () => {
     this.setState({ isLoading: true });
-    // get all the accounts from metamask
-    const accounts = await web3.eth.getAccounts();
-    // create campaign instance
-    const campaignInstance = campaign(this.props.campaignAddress);
-    // convert contribution value to wei
 
-    const contributionValue = web3.utils.toWei(
-      this.state.contributionValue,
-      "ether"
-    ); // contributionValue should be a little more than the expected value to account for gas
-    // call contribute function on the campaign
-    await campaignInstance.methods.contribute().send({
-      from: accounts[0], // gas is calculated automatically
-      value: contributionValue, // value sent to the contract
-    });
+    try {
+      // get all the accounts from metamask
+      const accounts = await web3.eth.getAccounts();
+      // create campaign instance
+      const campaignInstance = campaign(this.props.campaignAddress);
+      // convert contribution value to wei
+
+      const contributionValue = web3.utils.toWei(
+        this.state.contributionValue,
+        "ether"
+      ); // contributionValue should be a little more than the expected value to account for gas
+      // call contribute function on the campaign
+      await campaignInstance.methods.contribute().send({
+        from: accounts[0], // gas is calculated automatically
+        value: contributionValue, // value sent to the contract
+      });
+    } catch (err) {
+      // TODO: Add error message for the user
+      console.error(err);
+    }
 
     this.setState({ isLoading: false });
     // TODO: the page needs to update the data straight after the function is called. At the moment the user has to referesh the page to update the data
