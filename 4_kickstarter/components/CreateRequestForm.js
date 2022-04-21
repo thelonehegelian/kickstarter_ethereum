@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Checkbox, InputNumber } from "antd";
+import { Form, Input, Button } from "antd";
 /**
  *  string description;
         uint256 value; // in Wei, the money that is asked for and transferred at the finalization of the request
@@ -10,70 +10,97 @@ import { Form, Input, Button, Checkbox, InputNumber } from "antd";
  * 
  */
 
-export default function AddRequestForm() {
-  return (
-    <>
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Description"
-          name="Description"
-          rules={[
-            {
-              required: false,
-              message: "",
-            },
-          ]}
+export default class AddRequestForm extends React.Component {
+  state = {
+    requestDescription: "",
+    amountRequested: "",
+    recipientAddress: "",
+  };
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state);
+  };
+
+  handleClick = () => {
+    console.log("handleClick called");
+    // create the contract instance
+    // call the request method and send the transaction
+  };
+
+  render() {
+    return (
+      <>
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          autoComplete="off"
         >
-          {/* Convert input to Wei*/}
-          <Input placeholder="Description" value="" onChange="" />
-        </Form.Item>
-        <Form.Item
-          label="Amount in Ether"
-          name="etherAmount"
-          rules={[
-            {
-              required: true,
-              message: "Please enter an amount in Ether",
-            },
-          ]}
-        >
-          <InputNumber
-            style={{
-              width: 200,
-            }}
-            defaultValue="0.0000000000000001"
-            min="0"
-            max=""
-            step="0.0000000000000001"
-            onChange=""
-            stringMode
-          />
-        </Form.Item>
-        <Form.Item
-          label="Recipient"
-          name="recipient"
-          rules={[
-            {
-              required: true,
-              message: "Please enter an Ethereum Address",
-            },
-          ]}
-        >
-          <Input placeholder="Ethereum Address" value="" onChange="" />
-        </Form.Item>
-      </Form>
-    </>
-  );
+          <Form.Item
+            label="Request Description"
+            rules={[
+              {
+                required: false,
+                message: "",
+              },
+            ]}
+          >
+            {/* Description */}
+            <Input
+              type="text"
+              name="requestDescription"
+              placeholder="Description"
+              onChange={this.handleChange}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Amount Requested"
+            name="etherAmount"
+            rules={[
+              {
+                required: true,
+                message: "Please enter an amount in Ether",
+              },
+            ]}
+          >
+            {/* Amount Requested */}
+            <Input
+              type="number"
+              name="amountRequested"
+              placeholder="Ether"
+              onChange={this.handleChange}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Recipient"
+            name="recipient"
+            rules={[
+              {
+                required: true,
+                message: "Please enter an Ethereum Address",
+              },
+            ]}
+          >
+            {/* Ethereum Address */}
+            <Input
+              name="recipientAddress"
+              placeholder="Ethereum Address"
+              onChange={this.handleChange}
+            />
+          </Form.Item>
+        </Form>
+        <Button type="primary" onClick={this.handleClick}>
+          Create the Request
+        </Button>
+      </>
+    );
+  }
 }

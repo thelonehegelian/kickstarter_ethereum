@@ -65,6 +65,7 @@ export default class ContributeForm extends React.Component {
             ]}
           >
             {/* Convert input to Wei*/}
+            {/* TODO: Use <InputNumber/> instead*/}
             <Input
               placeholder="Ether"
               value={this.state.contributionValue}
