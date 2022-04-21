@@ -2,11 +2,14 @@ import React from "react";
 // import CreateRequestForm from "../../components/CreateRequestForm";
 import { Form, Input, Button } from "antd";
 import campaign from "../../ethereum/campaign";
+import web3 from "../../ethereum/web3";
+import { PoweroffOutlined } from "@ant-design/icons";
 export default class AddRequest extends React.Component {
   state = {
     requestDescription: "",
     amountRequested: "",
     recipientAddress: "",
+    isLoading: false,
   };
 
   static async getInitialProps(props) {
@@ -16,16 +19,35 @@ export default class AddRequest extends React.Component {
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
   };
 
-  handleClick = () => {
-    // create campaign instance
+  handleSubmit = async () => {
+    const { requestDescription, amountRequested, recipientAddress } =
+      this.state;
 
-    // call addRequest function on the contract
-    console.log("handleClick called");
-    // create the contract instance
-    // call the request method and send the transaction
+    this.setState({ isLoading: true });
+    try {
+      // get metmask addresses
+      const accounts = await web3.eth.getAccounts();
+      // create the contract instance
+      const campaignInstance = await campaign(this.props.campaignAddress);
+      // call addRequest function on the contract
+      await campaignInstance.methods
+        .createRequest(
+          requestDescription,
+          web3.utils.toWei(amountRequested, "ether"),
+          recipientAddress
+        )
+        .send({
+          from: accounts[0],
+        });
+      console.log("handleSubmit called");
+      //   const request = await campaignInstance.methods.requests(0).call();
+      //   console.log(request);
+    } catch (err) {
+      console.error(err);
+    }
+    this.setState({ isLoading: false });
   };
 
   render() {
@@ -98,9 +120,13 @@ export default class AddRequest extends React.Component {
             />
           </Form.Item>
         </Form>
-        <Button type="primary" onClick={this.handleClick}>
-          Create the Request
-        </Button>
+        {this.state.isLoading ? (
+          <Button type="primary" icon={<PoweroffOutlined />} loading />
+        ) : (
+          <Button onClick={this.handleSubmit} type="primary" htmlType="submit">
+            Create Request
+          </Button>
+        )}
       </>
     );
   }
