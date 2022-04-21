@@ -4,6 +4,7 @@ import { Form, Input, Button } from "antd";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
 import { PoweroffOutlined } from "@ant-design/icons";
+import Router from "next/router";
 export default class AddRequest extends React.Component {
   state = {
     requestDescription: "",
@@ -41,9 +42,7 @@ export default class AddRequest extends React.Component {
         .send({
           from: accounts[0],
         });
-      console.log("handleSubmit called");
-      //   const request = await campaignInstance.methods.requests(0).call();
-      //   console.log(request);
+      Router.pushRoute(`/campaigns/${this.props.campaignAddress}/requests`);
     } catch (err) {
       console.error(err);
     }
