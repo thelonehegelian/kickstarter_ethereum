@@ -29,6 +29,7 @@ export default class AddRequestForm extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <>
         <Form
