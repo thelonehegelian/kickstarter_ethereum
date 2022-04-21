@@ -1,9 +1,11 @@
 import React from "react";
 import CreateRequestForm from "../../components/CreateRequestForm";
 import { Form, Input, Button } from "antd";
+import campaign from "../../ethereum/campaign";
 export default class AddRequest extends React.Component {
   static async getInitialProps(props) {
-    return { props };
+    const campaignAddress = props.query.address;
+    return { campaignAddress: campaignAddress };
   }
   render() {
     return (
