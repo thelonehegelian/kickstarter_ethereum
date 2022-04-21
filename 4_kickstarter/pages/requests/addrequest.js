@@ -1,6 +1,6 @@
 import React from "react";
 // import CreateRequestForm from "../../components/CreateRequestForm";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Alert } from "antd";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
 import { PoweroffOutlined } from "@ant-design/icons";
@@ -11,6 +11,7 @@ export default class AddRequest extends React.Component {
     amountRequested: "",
     recipientAddress: "",
     isLoading: false,
+    error: { error: false, errorMessage: "" },
   };
 
   static async getInitialProps(props) {
@@ -44,7 +45,7 @@ export default class AddRequest extends React.Component {
         });
       Router.pushRoute(`/campaigns/${this.props.campaignAddress}/requests`);
     } catch (err) {
-      console.error(err);
+      this.setState({ error: { errror: true, errorMessage: err } });
     }
     this.setState({ isLoading: false });
   };
@@ -119,6 +120,9 @@ export default class AddRequest extends React.Component {
             />
           </Form.Item>
         </Form>
+        {this.state.error.error && (
+          <Alert message={this.state.error.errorMessage} type="error" />
+        )}
         {this.state.isLoading ? (
           <Button type="primary" icon={<PoweroffOutlined />} loading />
         ) : (
