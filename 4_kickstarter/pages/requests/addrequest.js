@@ -1,12 +1,33 @@
 import React from "react";
-import CreateRequestForm from "../../components/CreateRequestForm";
+// import CreateRequestForm from "../../components/CreateRequestForm";
 import { Form, Input, Button } from "antd";
 import campaign from "../../ethereum/campaign";
 export default class AddRequest extends React.Component {
+  state = {
+    requestDescription: "",
+    amountRequested: "",
+    recipientAddress: "",
+  };
+
   static async getInitialProps(props) {
     const campaignAddress = props.query.address;
     return { campaignAddress: campaignAddress };
   }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state);
+  };
+
+  handleClick = () => {
+    // create campaign instance
+
+    // call addRequest function on the contract
+    console.log("handleClick called");
+    // create the contract instance
+    // call the request method and send the transaction
+  };
+
   render() {
     return (
       <>
