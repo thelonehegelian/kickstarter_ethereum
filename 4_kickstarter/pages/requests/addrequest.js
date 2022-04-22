@@ -4,14 +4,15 @@ import { Form, Input, Button, Alert } from "antd";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
 import { PoweroffOutlined } from "@ant-design/icons";
-import Router from "next/router";
+import { Router, Link } from "../../routes";
 export default class AddRequest extends React.Component {
   state = {
     requestDescription: "",
     amountRequested: "",
     recipientAddress: "",
     isLoading: false,
-    error: { error: false, errorMessage: "" },
+    error: false,
+    errorMessage: "",
   };
 
   static async getInitialProps(props) {
@@ -45,7 +46,8 @@ export default class AddRequest extends React.Component {
         });
       Router.pushRoute(`/campaigns/${this.props.campaignAddress}/requests`);
     } catch (err) {
-      this.setState({ error: { errror: true, errorMessage: err } });
+      this.setState({ error: true, errorMessage: err });
+      console.log(this.state.error);
     }
     this.setState({ isLoading: false });
   };
@@ -54,6 +56,11 @@ export default class AddRequest extends React.Component {
     return (
       <>
         <h1>Add Request</h1>
+        <Link route={`/campaigns/${this.props.campaignAddress}/requests`}>
+          <a>
+            <Button type="primary"> Back</Button>
+          </a>
+        </Link>
         <Form
           name="basic"
           labelCol={{
@@ -120,9 +127,13 @@ export default class AddRequest extends React.Component {
             />
           </Form.Item>
         </Form>
-        {this.state.error.error && (
-          <Alert message={this.state.error.errorMessage} type="error" />
-        )}
+        {/* TODO: Add error message */}
+        {/* <div>
+          {this.state.error ? (
+            // <Alert message={this.state.errorMessage} type="error" />
+            <p>{this.state.errorMessage}</p>
+          ) : null}
+        </div> */}
         {this.state.isLoading ? (
           <Button type="primary" icon={<PoweroffOutlined />} loading />
         ) : (
