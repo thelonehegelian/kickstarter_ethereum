@@ -5,7 +5,6 @@ import RequestsTable from "../../components/RequestsTable";
 import { Button } from "antd";
 import { Link } from "../../routes";
 import campaign from "../../ethereum/campaign";
-import web3 from "../../ethereum/web3";
 
 // TODO: Add styles
 export default class RequestsIndex extends React.Component {
@@ -15,6 +14,8 @@ export default class RequestsIndex extends React.Component {
     // create campaign instance
     const campaignInstance = campaign(contractAddress);
     const contractSummary = await campaignInstance.methods.getSummary().call();
+    const approversCount = contractSummary["3"];
+    // const approversCount = contractSummary.approversCount;
     const requestCount = parseInt(contractSummary["2"]);
     const requests = await Promise.all(
       /**
@@ -50,6 +51,7 @@ export default class RequestsIndex extends React.Component {
       contractAddress: contractAddress,
       requests: requests,
       requestCount,
+      approversCount,
     };
   }
 

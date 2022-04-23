@@ -4,21 +4,33 @@ import campaign from "../ethereum/campaign";
 
 export default function RequestsTable(props) {
   // click handlers
-  const handleApprove = async () => {};
+  const handleApprove = async (evt) => {
+    console.log(evt);
+    // get contract address from the props
+    const contractAddress = props.contractAddress;
+    // create campaign instance
+    const campaignInstance = campaign(contractAddress);
+    // await campaignInstance.methods.approveRequest().call(campaignInstance)
+  };
 
+  const handleFinalize = async () => {};
   // create data array for rows
   let data = Array(props.requestCount)
     .fill()
     .map((element, index) => {
-      const requestData = props.requestData.requests[index]; // just easier to read
+      const { description, value, recipient, complete, approvalCount } =
+        props.requestData.requests[index]; // just easier to read
+
       return {
         id: index + 1, // adds id key to the request object (isn't required though)
-        ...requestData,
-        complete: requestData.complete.toString(), // convert complete value to string for rendering in the table
-        value: web3.utils.fromWei(requestData.value, "ether"), // convert value to ether ether
+        description,
+        value: web3.utils.fromWei(value, "ether"), // convert value to ether ether
+        recipient,
+        complete: complete.toString(), // convert complete value to string for rendering in the table
+        approvalCount: `${approvalCount} / ${props.requestData.approversCount}`,
       };
     });
-
+  console.log(data);
   const columns = [
     {
       title: "Id",
@@ -50,9 +62,15 @@ export default function RequestsTable(props) {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Space size="middle" onClick={handleApprove}>
-          <a>Approve {record.name} </a>
-          <a>Finalize</a>
+        <Space size="middle">
+          <a
+            onClick={(evt) => {
+              console.log(evt);
+            }}
+          >
+            Approve {record.name}{" "}
+          </a>
+          <a onClick={handleFinalize}>Finalize</a>
         </Space>
       ),
     },
