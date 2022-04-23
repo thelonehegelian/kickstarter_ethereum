@@ -14,7 +14,6 @@ export default function RequestsTWable(props) {
         value: web3.utils.fromWei(requestData.value, "ether"), // convert value to ether ether
       };
     });
-  console.log(data);
 
   const columns = [
     {

@@ -57,7 +57,7 @@ export default class RequestsIndex extends React.Component {
     return (
       <>
         <div>
-          <h1>Show Requests</h1>
+          <h1>Requests</h1>
           {/* TODO: only show the button if the connected metmask address is of manager, because only the manager is allowed to add a request */}
           <Link route={`/campaigns/${this.props.contractAddress}/requests/new`}>
             <a>
