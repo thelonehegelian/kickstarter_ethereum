@@ -29,8 +29,6 @@ export default class RequestsIndex extends React.Component {
         })
     );
 
-    console.log(typeof requestCount);
-
     /**
      * This code block does the same as above. My first attempt was to write using map() but I was not familiar with fill()
      * contractSummary["2"] = number of requests, 1,2,3,...
@@ -51,6 +49,7 @@ export default class RequestsIndex extends React.Component {
     return {
       contractAddress: contractAddress,
       requests: requests,
+      requestCount,
     };
   }
 
@@ -66,7 +65,7 @@ export default class RequestsIndex extends React.Component {
             </a>
           </Link>
         </div>
-        <RequestsTable />
+        <RequestsTable requestData={this.props} />
       </>
     );
   }

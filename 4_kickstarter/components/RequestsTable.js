@@ -2,41 +2,76 @@ import { Table, Tag, Space } from "antd";
 
 const { Column, ColumnGroup } = Table;
 
-const data = [
-  {
-    id: "1",
-    description: "John",
-    amount: "",
-    recipient: 32,
-    approvalCount: "",
-    approve: "",
-    finalize: "",
-  },
-];
+export default function RequestsTWable(props) {
+  // console.log(props.requestData.requests[0].description);
 
-export default function RequestsTrable(props) {
-  console.log(props);
+  let data = Array(props.requestCount)
+    .fill()
+    .map((element, index) => {
+      return {
+        id: index,
+        ...props.requestData.requests[index],
+      };
+    });
+  console.log(data);
+  // const data = [
+  //   {
+  //     id: "1",
+  //     description: "John",
+  //     value: "150",
+  //     recipient: 32,
+  //     complete: "",
+  //     approvalCount: "",
+  //     finalize: "",
+  //   },
+  // ];
+
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "Value",
+      dataIndex: "value",
+      key: "value",
+    },
+    { title: "Recipient", dataIndex: "recipient", key: "recipient" },
+    {
+      title: "Approval Count",
+      dataIndex: "approvalCount",
+      key: "approvalCount",
+    },
+    {
+      title: "Complete",
+      dataIndex: "complete",
+      key: "complete",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <Space size="middle">
+          <a>Approve {record.name}</a>
+          <a>Finalize</a>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <>
-      <Table dataSource={data}>
-        {/* map the array */}
-        <Column title="Id" dataIndex="firstName" key="firstName" />
-        <Column title="Description" dataIndex="lastName" key="lastName" />
-        <Column title="Amount" dataIndex="age" key="age" />
-        <Column title="Recipient" dataIndex="address" key="address" />
-        <Column title="Approval Count" dataIndex="address" key="address" />
-        <Column
-          title="Action"
-          key="action"
-          render={(text, record) => (
-            <Space size="middle">
-              <a>Approve</a>
-              <a>Finalize</a>
-            </Space>
-          )}
-        />
-      </Table>
+      <Table dataSource={data} columns={columns} />
     </>
   );
 }
+/**
+ *
+ *
+ */
