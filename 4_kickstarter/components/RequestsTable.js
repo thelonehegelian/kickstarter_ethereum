@@ -22,7 +22,7 @@ export default function RequestsTable(props) {
         props.requestData.requests[index]; // just easier to read and handle
 
       return {
-        id: index + 1, // adds id key to the request object (isn't required though)
+        id: index, // adds id key to the request object (isn't required though)
         description,
         value: web3.utils.fromWei(value, "ether"), // convert value to ether ether
         recipient,
