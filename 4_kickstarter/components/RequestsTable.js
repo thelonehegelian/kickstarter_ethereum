@@ -3,28 +3,17 @@ import { Table, Tag, Space } from "antd";
 const { Column, ColumnGroup } = Table;
 
 export default function RequestsTWable(props) {
-  // console.log(props.requestData.requests[0].description);
-
+  // create data array for rows
   let data = Array(props.requestCount)
     .fill()
     .map((element, index) => {
       return {
-        id: index,
+        id: index, // adds id key to the request object (isn't required though)
         ...props.requestData.requests[index],
+        complete: requestData.complete.toString(), // convert complete value to string for rendering in the table
       };
     });
   console.log(data);
-  // const data = [
-  //   {
-  //     id: "1",
-  //     description: "John",
-  //     value: "150",
-  //     recipient: 32,
-  //     complete: "",
-  //     approvalCount: "",
-  //     finalize: "",
-  //   },
-  // ];
 
   const columns = [
     {
