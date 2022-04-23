@@ -15,22 +15,33 @@ export default class RequestsIndex extends React.Component {
     // create campaign instance
     const campaignInstance = campaign(contractAddress);
     const contractSummary = await campaignInstance.methods.getSummary().call();
-    let requestSummary;
-    let requests = [];
-    // call requests fuction on the contract
+    const requestCount = contractSummary["2"];
+    const requests = await Promise.all(
+      Array(requestCount)
+        .fill()
+        .map((element, index) => {
+          return campaignInstance.methods.requests(index).call();
+        })
+    );
+
+    console.log(requests);
+
     /**
      * contractSummary["2"] = number of requests, 1,2,3,...
      * we need the requests index to start from 0 because that will be the first request
      * contractSummary["2"] should must be > 0, if it is not then there are no requests for the campaign
      */
-    if (contractSummary["2"] != 0) {
-      for (let i = contractSummary["2"] - 1; i < contractSummary["2"]; i++) {
-        requestSummary = await campaignInstance.methods.requests(i).call();
-        requests.push(requestSummary);
-        // console.log(requestSummary);
-      }
-    }
-    console.log(requests);
+    //  let requestSummary;
+    //  let requests = [];
+    // if (contractSummary["2"] != 0) {
+    //   for (let i = contractSummary["2"] - 1; i < contractSummary["2"]; i++) {
+    //     // call requests fuction on the contract
+    //     requestSummary = await campaignInstance.methods.requests(i).call();
+    //     requests.push(requestSummary);
+    //     // console.log(requestSummary);
+    //   }
+    // }
+
     return {
       contractAddress: contractAddress,
       requests: requests,
