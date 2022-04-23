@@ -1,16 +1,17 @@
 import { Table, Tag, Space } from "antd";
-
-const { Column, ColumnGroup } = Table;
+import web3 from "../ethereum/web3";
 
 export default function RequestsTWable(props) {
   // create data array for rows
   let data = Array(props.requestCount)
     .fill()
     .map((element, index) => {
+      const requestData = props.requestData.requests[index]; // just easier to read
       return {
         id: index, // adds id key to the request object (isn't required though)
-        ...props.requestData.requests[index],
+        ...requestData,
         complete: requestData.complete.toString(), // convert complete value to string for rendering in the table
+        value: web3.utils.fromWei(requestData.value, "ether"), // convert value to ether ether
       };
     });
   console.log(data);
@@ -27,7 +28,7 @@ export default function RequestsTWable(props) {
       key: "description",
     },
     {
-      title: "Value",
+      title: "Value (Ether)",
       dataIndex: "value",
       key: "value",
     },
