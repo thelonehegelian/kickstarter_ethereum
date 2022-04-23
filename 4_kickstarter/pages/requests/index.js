@@ -12,13 +12,29 @@ export default class RequestsIndex extends React.Component {
   static async getInitialProps(props) {
     // get contract address from the props
     const contractAddress = props.query.address;
-    // // create campaign instance
-    // const campaignInstance = campaign(contractAddress);
-    // // call requests fuction on the contract
-    // const requestSummary = await campaignInstance.methods.requests(0).call();
-    // console.log(requestSummary);
-
-    return { contractAddress: contractAddress };
+    // create campaign instance
+    const campaignInstance = campaign(contractAddress);
+    const contractSummary = await campaignInstance.methods.getSummary().call();
+    let requestSummary;
+    let requests = [];
+    // call requests fuction on the contract
+    /**
+     * contractSummary["2"] = number of requests, 1,2,3,...
+     * we need the requests index to start from 0 because that will be the first request
+     * contractSummary["2"] should must be > 0, if it is not then there are no requests for the campaign
+     */
+    if (contractSummary["2"] != 0) {
+      for (let i = contractSummary["2"] - 1; i < contractSummary["2"]; i++) {
+        requestSummary = await campaignInstance.methods.requests(i).call();
+        requests.push(requestSummary);
+        // console.log(requestSummary);
+      }
+    }
+    console.log(requests);
+    return {
+      contractAddress: contractAddress,
+      requests: requests,
+    };
   }
 
   render() {

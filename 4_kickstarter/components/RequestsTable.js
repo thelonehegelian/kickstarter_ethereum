@@ -14,10 +14,13 @@ const data = [
   },
 ];
 
-export default function RequestsTrable() {
+export default function RequestsTrable(props) {
+  console.log(props);
+
   return (
     <>
       <Table dataSource={data}>
+        {/* map the array */}
         <Column title="Id" dataIndex="firstName" key="firstName" />
         <Column title="Description" dataIndex="lastName" key="lastName" />
         <Column title="Amount" dataIndex="age" key="age" />
