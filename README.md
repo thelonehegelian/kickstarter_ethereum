@@ -314,6 +314,9 @@ TODO: Why NextJs is better in general and why is it a good choice for an ethereu
 TODO: Why is fetching data in componentDidMount is not advisable in NextJs?
 TODO: What is getInitiaProps?
 TODO: How to prevent JavaScript from rendering on the page?
+TODO: How to get all metamask addresses?
+
+How to use Array().fill() : https://stackoverflow.com/questions/56704826/difference-between-fill-and-fill-map
 
 ### FAQ
 
