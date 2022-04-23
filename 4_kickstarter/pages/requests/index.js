@@ -15,8 +15,13 @@ export default class RequestsIndex extends React.Component {
     // create campaign instance
     const campaignInstance = campaign(contractAddress);
     const contractSummary = await campaignInstance.methods.getSummary().call();
-    const requestCount = contractSummary["2"];
+    const requestCount = parseInt(contractSummary["2"]);
     const requests = await Promise.all(
+      /**
+       * Array(): create an array with n elements
+       * .map(): loop through index 0 until Array length and creates an object for each index
+       * .fill: fill the array with requests
+       */
       Array(requestCount)
         .fill()
         .map((element, index) => {
@@ -24,9 +29,10 @@ export default class RequestsIndex extends React.Component {
         })
     );
 
-    console.log(requests);
+    console.log(typeof requestCount);
 
     /**
+     * This code block does the same as above. My first attempt was to write using map() but I was not familiar with fill()
      * contractSummary["2"] = number of requests, 1,2,3,...
      * we need the requests index to start from 0 because that will be the first request
      * contractSummary["2"] should must be > 0, if it is not then there are no requests for the campaign
