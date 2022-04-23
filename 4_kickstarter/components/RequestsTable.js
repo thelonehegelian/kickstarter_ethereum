@@ -8,7 +8,7 @@ export default function RequestsTWable(props) {
     .map((element, index) => {
       const requestData = props.requestData.requests[index]; // just easier to read
       return {
-        id: index, // adds id key to the request object (isn't required though)
+        id: index + 1, // adds id key to the request object (isn't required though)
         ...requestData,
         complete: requestData.complete.toString(), // convert complete value to string for rendering in the table
         value: web3.utils.fromWei(requestData.value, "ether"), // convert value to ether ether
