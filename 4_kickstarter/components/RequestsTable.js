@@ -1,7 +1,11 @@
 import { Table, Tag, Space } from "antd";
 import web3 from "../ethereum/web3";
+import campaign from "../ethereum/campaign";
 
-export default function RequestsTWable(props) {
+export default function RequestsTable(props) {
+  // click handlers
+  const handleApprove = async () => {};
+
   // create data array for rows
   let data = Array(props.requestCount)
     .fill()
@@ -46,8 +50,8 @@ export default function RequestsTWable(props) {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Space size="middle">
-          <a>Approve {record.name}</a>
+        <Space size="middle" onClick={handleApprove}>
+          <a>Approve {record.name} </a>
           <a>Finalize</a>
         </Space>
       ),
