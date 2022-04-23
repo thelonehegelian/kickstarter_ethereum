@@ -26,7 +26,7 @@ export default function RequestsTable(props) {
         description,
         value: web3.utils.fromWei(value, "ether"), // convert value to ether ether
         recipient,
-        complete: complete.toString(), // convert complete value to string for rendering in the table
+        complete: complete ? "Yes" : "No", // convert complete value to string for rendering in the table
         approvalCount: `${approvalCount} / ${props.requestData.approversCount}`,
       };
     });
