@@ -4,6 +4,7 @@ import React from "react";
 import { Button, Table, Space } from "antd";
 import { Link } from "../../routes";
 import campaign from "../../ethereum/campaign";
+import web3 from "../../ethereum/web3";
 
 // TODO: Add styles
 export default class RequestsIndex extends React.Component {
@@ -55,6 +56,23 @@ export default class RequestsIndex extends React.Component {
   }
 
   render() {
+    // data array
+    const data = [
+      this.props.requests.map((el, index) => {
+        const { description, value, recipient, complete, approvalCount } = el; // just easier to read and handle
+
+        return {
+          id: index, // adds id key to the request object (isn't required though)
+          description,
+          value: web3.utils.fromWei(value, "ether"), // convert value to ether ether
+          recipient,
+          complete: complete ? "Yes" : "No", // convert complete value to string for rendering in the table
+          approvalCount: `${approvalCount} / ${this.props.approversCount}`,
+        };
+      }),
+    ];
+
+    console.log(data);
     // Table columns array
     const columns = [
       {
@@ -89,15 +107,10 @@ export default class RequestsIndex extends React.Component {
 
         render: (text, record) => (
           <Space size="middle">
-            <a
-              id={data[0].id}
-              onClick={(evt, data) => {
-                console.log(evt.target.id);
-              }}
-            >
+            <a id={data[0].id} onClick={null}>
               Approve {record.name}{" "}
             </a>
-            <a onClick={handleFinalize}>Finalize</a>
+            <a onClick={null}>Finalize</a>
           </Space>
         ),
       },
@@ -113,7 +126,7 @@ export default class RequestsIndex extends React.Component {
             </a>
           </Link>
         </div>
-        <Table dataSource={null} columns={columns} />
+        <Table dataSource={data[0]} columns={columns} />
       </>
     );
   }
