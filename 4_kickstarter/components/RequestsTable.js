@@ -4,8 +4,8 @@ import campaign from "../ethereum/campaign";
 
 export default function RequestsTable(props) {
   // click handlers
-  const handleApprove = async (evt) => {
-    console.log(evt.target);
+  const handleApprove = async (event) => {
+    console.log(event.target.value);
     // get contract address from the props
     const contractAddress = props.contractAddress;
     // create campaign instance
@@ -14,6 +14,7 @@ export default function RequestsTable(props) {
   };
 
   const handleFinalize = async () => {};
+
   // create data array for rows
   let data = Array(props.requestCount)
     .fill()
@@ -30,6 +31,7 @@ export default function RequestsTable(props) {
         approvalCount: `${approvalCount} / ${props.requestData.approversCount}`,
       };
     });
+
   const columns = [
     {
       title: "Id",
@@ -60,9 +62,17 @@ export default function RequestsTable(props) {
     {
       title: "Action",
       key: "action",
+
       render: (text, record) => (
         <Space size="middle">
-          <a onClick={handleApprove}>Approve {record.name} </a>
+          <a
+            id={data[0].id}
+            onClick={(evt, data) => {
+              console.log(evt.target.id);
+            }}
+          >
+            Approve {record.name}{" "}
+          </a>
           <a onClick={handleFinalize}>Finalize</a>
         </Space>
       ),
