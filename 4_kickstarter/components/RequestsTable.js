@@ -32,6 +32,8 @@ export default function RequestsTable(props) {
       };
     });
 
+  console.log(data);
+
   const columns = [
     {
       title: "Id",

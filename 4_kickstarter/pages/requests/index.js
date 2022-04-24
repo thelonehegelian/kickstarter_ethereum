@@ -1,8 +1,7 @@
 // shows a list of requests for the campaign
 
 import React from "react";
-import RequestsTable from "../../components/RequestsTable";
-import { Button } from "antd";
+import { Button, Table, Space } from "antd";
 import { Link } from "../../routes";
 import campaign from "../../ethereum/campaign";
 
@@ -56,6 +55,53 @@ export default class RequestsIndex extends React.Component {
   }
 
   render() {
+    // Table columns array
+    const columns = [
+      {
+        title: "Id",
+        dataIndex: "id",
+        key: "id",
+      },
+      {
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
+      },
+      {
+        title: "Value (Ether)",
+        dataIndex: "value",
+        key: "value",
+      },
+      { title: "Recipient", dataIndex: "recipient", key: "recipient" },
+      {
+        title: "Approval Count",
+        dataIndex: "approvalCount",
+        key: "approvalCount",
+      },
+      {
+        title: "Complete",
+        dataIndex: "complete",
+        key: "complete",
+      },
+      {
+        title: "Action",
+        key: "action",
+
+        render: (text, record) => (
+          <Space size="middle">
+            <a
+              id={data[0].id}
+              onClick={(evt, data) => {
+                console.log(evt.target.id);
+              }}
+            >
+              Approve {record.name}{" "}
+            </a>
+            <a onClick={handleFinalize}>Finalize</a>
+          </Space>
+        ),
+      },
+    ];
     return (
       <>
         <div>
@@ -67,7 +113,7 @@ export default class RequestsIndex extends React.Component {
             </a>
           </Link>
         </div>
-        <RequestsTable requestData={this.props} />
+        <Table dataSource={null} columns={columns} />
       </>
     );
   }
