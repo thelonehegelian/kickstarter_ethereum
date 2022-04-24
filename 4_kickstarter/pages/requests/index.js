@@ -79,6 +79,10 @@ export default class RequestsIndex extends React.Component {
       }),
     ];
 
+    /**
+     * This is used when columns are also passed as array in <Table/>
+     * For now not using this method
+     */
     // Table columns array
     // const columns = [
     //   {
@@ -114,9 +118,9 @@ export default class RequestsIndex extends React.Component {
     //     render: (text, record) => (
     //       <Space size="middle">
     //         <a
-    //           id={data[0]}
+    //
     //           onClick={(evt) => {
-    //             console.log(evt.target.parentNode);
+    //             console.log(record.id);
     //           }}
     //         >
     //           Approve {record.name}{" "}
@@ -137,7 +141,7 @@ export default class RequestsIndex extends React.Component {
             </a>
           </Link>
         </div>
-        <Table dataSource={data[0]} rowKey="id">
+        <Table dataSource={data[0]} rowKey={(record) => record.id}>
           <Column title="Id" dataIndex="id" key="id" />
           <Column
             title="Description"
