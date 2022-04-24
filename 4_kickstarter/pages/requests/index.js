@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button, Table, Space, Column, Divider } from "antd";
-import { Link } from "../../routes";
+import { Link, Router } from "../../routes";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
 
@@ -55,10 +55,34 @@ export default class RequestsIndex extends React.Component {
     };
   }
 
-  handleApprove = (requestId) => {
-    console.log(requestId);
+  state = {
+    isLoading: false,
+    error: false,
+    errorMessage: "",
   };
-  handleFinalize = (requestId) => {
+
+  handleApprove = async (requestId) => {
+    console.log("Handle approve called");
+    this.setState({ isLoading: true });
+    try {
+      // get contract address from the props
+      const contractAddress = this.props.contractAddress;
+      // create campaign instance
+      const campaignInstance = campaign(contractAddress);
+      // approve the request
+      await campaignInstance.methods
+        .approveRequest(requestId)
+        .call(campaignInstance);
+      // add a loader here
+      // refresh page
+      Router.push(`/campaigns/${contractAddress}/requests`);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+      console.log(err.message);
+    }
+    this.setState({ isLoading: false });
+  };
+  handleFinalize = async (requestId) => {
     console.log(requestId);
   };
 
@@ -141,7 +165,11 @@ export default class RequestsIndex extends React.Component {
             </a>
           </Link>
         </div>
-        <Table dataSource={data[0]} rowKey={(record) => record.id}>
+        <Table
+          dataSource={data[0]}
+          rowKey={(record) => record.id}
+          loading={this.state.isLoading ? true : false}
+        >
           <Column title="Id" dataIndex="id" key="id" />
           <Column
             title="Description"
