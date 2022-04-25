@@ -83,7 +83,24 @@ export default class RequestsIndex extends React.Component {
   };
   // Finalize requests when user clicks Finalize
   handleFinalize = async (requestId) => {
-    console.log(`handle finalized called: ${requestId}`);
+    this.setState({ isLoading: true });
+    try {
+      // get accounts
+      const accounts = await web3.eth.getAccounts();
+      // get contract address
+      const contractAddress = this.props.contractAddress;
+      // create campaign instance
+      const campaignInstance = campaign(contractAddress);
+      // 'sent' finalize request method
+      await campaignInstance.methods.finalizeRequest(requestId).send({
+        from: accounts[0],
+      });
+      // refresh page to refresh data
+      Router.push(`campaigns/${contractAddress}/requests`);
+    } catch (err) {
+      this.setState({ error: true, errorMessage: err.message });
+    }
+    this.setState({ isLoading: false });
   };
 
   render() {
