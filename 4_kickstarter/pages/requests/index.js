@@ -1,7 +1,7 @@
 // shows a list of requests for the campaign
 
 import React from "react";
-import { Button, Table, Column, Divider, Space } from "antd";
+import { Button, Table, Column, Divider, Space, Alert } from "antd";
 import { Link, Router } from "../../routes";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
@@ -60,9 +60,8 @@ export default class RequestsIndex extends React.Component {
     error: false,
     errorMessage: "",
   };
-
+  // approves a request when user click Approve
   handleApprove = async (requestId) => {
-    console.log("Handle approve called");
     this.setState({ isLoading: true });
     try {
       const accounts = await web3.eth.getAccounts();
@@ -78,12 +77,11 @@ export default class RequestsIndex extends React.Component {
       // refresh page
       Router.push(`/campaigns/${contractAddress}/requests`);
     } catch (err) {
-      this.setState({ errorMessage: err.message });
-      console.log(err.message);
+      this.setState({ error: true, errorMessage: err.message });
     }
     this.setState({ isLoading: false });
-    console.log("handleApprove finished");
   };
+  // Finalize requests when user clicks Finalize
   handleFinalize = async (requestId) => {
     console.log(`handle finalized called: ${requestId}`);
   };
@@ -162,6 +160,12 @@ export default class RequestsIndex extends React.Component {
       <>
         <div>
           <h1>Requests</h1>
+          {this.state.error ? (
+            <Alert message={this.state.errorMessage} banner closable />
+          ) : (
+            <br />
+          )}
+
           {/* TODO: only show the button if the connected metmask address is of manager, because only the manager is allowed to add a request */}
           <Link route={`/campaigns/${this.props.contractAddress}/requests/new`}>
             <a>
