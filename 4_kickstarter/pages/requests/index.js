@@ -1,7 +1,7 @@
 // shows a list of requests for the campaign
 
 import React from "react";
-import { Button, Table, Space, Column, Divider } from "antd";
+import { Button, Table, Column, Divider } from "antd";
 import { Link, Router } from "../../routes";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
@@ -65,15 +65,16 @@ export default class RequestsIndex extends React.Component {
     console.log("Handle approve called");
     this.setState({ isLoading: true });
     try {
+      const accounts = await web3.eth.getAccounts();
       // get contract address from the props
       const contractAddress = this.props.contractAddress;
       // create campaign instance
       const campaignInstance = campaign(contractAddress);
       // approve the request
-      await campaignInstance.methods
-        .approveRequest(requestId)
-        .call(campaignInstance);
-      // add a loader here
+      await campaignInstance.methods.approveRequest(requestId).send({
+        from: accounts[0],
+      });
+      // TODO: add a loader here
       // refresh page
       Router.push(`/campaigns/${contractAddress}/requests`);
     } catch (err) {
@@ -81,6 +82,7 @@ export default class RequestsIndex extends React.Component {
       console.log(err.message);
     }
     this.setState({ isLoading: false });
+    console.log("handleApprove finished");
   };
   handleFinalize = async (requestId) => {
     console.log(requestId);
