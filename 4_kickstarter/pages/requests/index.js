@@ -174,6 +174,7 @@ export default class RequestsIndex extends React.Component {
           columns={columns}
           rowKey={(record) => record.id}
           loading={this.state.isLoading ? true : false}
+          pagination={false}
         />
       </>
     );
