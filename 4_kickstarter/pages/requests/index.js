@@ -137,6 +137,7 @@ export default class RequestsIndex extends React.Component {
         title: "Action",
         key: "action",
 
+        // TODO: Approve and finalize can be handled within a single function
         render: (text, record) => (
           <Space size="middle">
             <a
