@@ -1,7 +1,7 @@
 // shows a list of requests for the campaign
 
 import React from "react";
-import { Button, Table, Column, Divider } from "antd";
+import { Button, Table, Column, Divider, Space } from "antd";
 import { Link, Router } from "../../routes";
 import campaign from "../../ethereum/campaign";
 import web3 from "../../ethereum/web3";
@@ -85,7 +85,7 @@ export default class RequestsIndex extends React.Component {
     console.log("handleApprove finished");
   };
   handleFinalize = async (requestId) => {
-    console.log(requestId);
+    console.log(`handle finalized called: ${requestId}`);
   };
 
   render() {
@@ -105,57 +105,58 @@ export default class RequestsIndex extends React.Component {
       }),
     ];
 
-    /**
-     * This is used when columns are also passed as array in <Table/>
-     * For now not using this method
-     */
     // Table columns array
-    // const columns = [
-    //   {
-    //     title: "Id",
-    //     dataIndex: "id",
-    //     key: "id",
-    //   },
-    //   {
-    //     title: "Description",
-    //     dataIndex: "description",
-    //     key: "description",
-    //   },
-    //   {
-    //     title: "Value (Ether)",
-    //     dataIndex: "value",
-    //     key: "value",
-    //   },
-    //   { title: "Recipient", dataIndex: "recipient", key: "recipient" },
-    //   {
-    //     title: "Approval Count",
-    //     dataIndex: "approvalCount",
-    //     key: "approvalCount",
-    //   },
-    //   {
-    //     title: "Complete",
-    //     dataIndex: "complete",
-    //     key: "complete",
-    //   },
-    //   {
-    //     title: "Action",
-    //     key: "action",
+    const columns = [
+      {
+        title: "Id",
+        dataIndex: "id",
+        key: "id",
+      },
+      {
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
+      },
+      {
+        title: "Value (Ether)",
+        dataIndex: "value",
+        key: "value",
+      },
+      { title: "Recipient", dataIndex: "recipient", key: "recipient" },
+      {
+        title: "Approval Count",
+        dataIndex: "approvalCount",
+        key: "approvalCount",
+      },
+      {
+        title: "Complete",
+        dataIndex: "complete",
+        key: "complete",
+      },
+      {
+        title: "Action",
+        key: "action",
 
-    //     render: (text, record) => (
-    //       <Space size="middle">
-    //         <a
-    //
-    //           onClick={(evt) => {
-    //             console.log(record.id);
-    //           }}
-    //         >
-    //           Approve {record.name}{" "}
-    //         </a>
-    //         <a onClick={null}>Finalize</a>
-    //       </Space>
-    //     ),
-    //   },
-    // ];
+        render: (text, record) => (
+          <Space size="middle">
+            <a
+              onClick={(evt) => {
+                this.handleApprove(record.id);
+              }}
+            >
+              Approve
+            </a>
+            <a
+              onClick={(evt) => {
+                this.handleFinalize(record.id);
+              }}
+            >
+              Finalize
+            </a>
+          </Space>
+        ),
+      },
+    ];
     return (
       <>
         <div>
@@ -169,10 +170,17 @@ export default class RequestsIndex extends React.Component {
         </div>
         <Table
           dataSource={data[0]}
+          columns={columns}
           rowKey={(record) => record.id}
           loading={this.state.isLoading ? true : false}
-        >
-          <Column title="Id" dataIndex="id" key="id" />
+        />
+      </>
+    );
+  }
+}
+
+/**
+ *           <Column title="Id" dataIndex="id" key="id" />
           <Column
             title="Description"
             dataIndex="description"
@@ -200,8 +208,4 @@ export default class RequestsIndex extends React.Component {
               </span>
             )}
           />
-        </Table>
-      </>
-    );
-  }
-}
+ */
