@@ -10,7 +10,7 @@ import { Layout } from "antd";
 
 const { Content } = Layout;
 
-let campaignName = "Little Bittle Campaign";
+let campaignName = "Example Campaign";
 export default class CampaignIndex extends React.Component {
   // get data from the ethereum contract and set it as props for this component
   // the function should resolve to an object
