@@ -1,5 +1,6 @@
 # Ethereum-based Kickstarter Clone
 
+
 **Description:**
 
 The Ethereum-based Kickstarter Clone is a decentralized crowdfunding platform inspired by Kickstarter, running on the Ethereum blockchain. This project empowers users to create and participate in crowdfunding campaigns securely and transparently.
